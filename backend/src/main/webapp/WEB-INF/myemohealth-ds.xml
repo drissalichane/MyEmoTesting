@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.jboss.com/xml/ns/javaee
+             http://www.jboss.org/schema/jbossas/jboss-as-data-sources_1_1.xsd">
+    
+    <datasource jndi-name="java:jboss/datasources/MyEmoHealthDS"
+                pool-name="MyEmoHealthDS"
+                enabled="true"
+                use-java-context="true">
+        
+        <connection-url>jdbc:postgresql://localhost:5432/suiviemot</connection-url>
+        <driver>postgresql</driver>
+        
+        <security>
+            <user-name>houssam</user-name>
+            <password>123456</password>
+        </security>
+        
+        <pool>
+            <min-pool-size>5</min-pool-size>
+            <max-pool-size>20</max-pool-size>
+            <prefill>true</prefill>
+        </pool>
+        
+        <validation>
+            <validate-on-match>true</validate-on-match>
+            <background-validation>false</background-validation>
+            <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
+            <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter"/>
+        </validation>
+        
+        <timeout>
+            <idle-timeout-minutes>5</idle-timeout-minutes>
+        </timeout>
+        
+        <statement>
+            <prepared-statement-cache-size>32</prepared-statement-cache-size>
+            <share-prepared-statements>true</share-prepared-statements>
+        </statement>
+    </datasource>
+</datasources>

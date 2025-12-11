@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: myemohealth-db
+    environment:
+      POSTGRES_DB: suiviemot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init-db.sql:/docker-entrypoint-initdb.d/01-init.sql
+      - ./database/seed-data.sql:/docker-entrypoint-initdb.d/02-seed.sql
+    networks:
+      - myemohealth-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Jakarta EE Backend (WildFly)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: myemohealth-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: suiviemot
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: MyEmoHealth_Super_Secret_Key_Change_In_Production_2024!
+    ports:
+      - "8080:8080"
+      - "9990:9990"  # WildFly admin console
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - myemohealth-network
+    volumes:
+      - backend_storage:/var/myemohealth/storage
+
+  # Angular Web Admin (nginx)
+  web-admin:
+    build:
+      context: ./web-admin
+      dockerfile: Dockerfile
+    container_name: myemohealth-web
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - myemohealth-network
+    environment:
+      API_URL: http://localhost:8080/api
+
+  # Optional: Voice Analysis Service (placeholder)
+  # voice-analysis:
+  #   image: your-voice-analysis-service:latest
+  #   container_name: myemohealth-voice
+  #   ports:
+  #     - "8081:8081"
+  #   networks:
+  #     - myemohealth-network
+
+networks:
+  myemohealth-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  backend_storage:

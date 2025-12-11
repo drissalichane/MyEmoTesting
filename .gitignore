@@ -1,0 +1,64 @@
+# MyEmoHealth - Git Ignore
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Backend (Java/Maven)
+backend/target/
+backend/*.log
+backend/*.jar
+backend/*.war
+backend/*.ear
+backend/.settings/
+backend/.project
+backend/.classpath
+
+# Mobile (Flutter)
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.packages
+mobile/build/
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/local.properties
+mobile/pubspec.lock
+
+# Web Admin (Angular/Node)
+web-admin/node_modules/
+web-admin/dist/
+web-admin/.angular/
+web-admin/npm-debug.log*
+web-admin/yarn-debug.log*
+web-admin/yarn-error.log*
+
+# Database
+*.sql.backup
+database/backups/
+
+# Storage
+storage/
+uploads/
+voice-recordings/
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# OS
+Thumbs.db

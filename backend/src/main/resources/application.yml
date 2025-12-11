@@ -1,0 +1,134 @@
+spring:
+  application:
+    name: myemohealth
+  
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/suiviemot
+    username: houssam
+    password: 123456
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  
+  # JPA/Hibernate Configuration
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          batch_size: 20
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
+  
+  # Jackson Configuration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: UTC
+    default-property-inclusion: non_null
+
+# Server Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  error:
+    include-message: always
+    include-binding-errors: always
+
+# Application Configuration
+app:
+  name: MyEmoHealth
+  version: 1.0.0
+  environment: development
+  
+  # JWT Configuration
+  jwt:
+    secret: MyEmoHealth_Super_Secret_Key_Change_In_Production_2024!
+    access-token-expiration: 3600000      # 1 hour in milliseconds
+    refresh-token-expiration: 604800000   # 7 days in milliseconds
+  
+  # File Storage Configuration
+  storage:
+    base-path: /var/myemohealth/storage
+    voice-path: ${app.storage.base-path}/voice
+    attachments-path: ${app.storage.base-path}/attachments
+    max-file-size-mb: 50
+  
+  # Voice Analysis Service
+  voice-analysis:
+    enabled: true
+    service-url: http://localhost:8081/api/analyze
+    api-key: your_api_key_here
+    timeout-seconds: 30
+  
+  # WebRTC Configuration
+  webrtc:
+    enabled: true
+    stun-server: stun:stun.l.google.com:19302
+    turn-server: 
+    turn-username: 
+    turn-password: 
+  
+  # Email Configuration
+  email:
+    enabled: false
+    smtp:
+      host: smtp.gmail.com
+      port: 587
+    username: 
+    password: 
+    from:
+      address: noreply@myemohealth.com
+      name: MyEmoHealth
+  
+  # Security Configuration
+  security:
+    cors:
+      allowed-origins: http://localhost:4200,http://localhost:3000
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+      allowed-headers: "*"
+      allow-credentials: true
+    encryption:
+      algorithm: AES/GCM/NoPadding
+      key-size: 256
+  
+  # Business Rules
+  business:
+    phase-count: 5
+    tests-per-phase: 3
+    test-passing-score: 7.5
+    test-max-score: 10.0
+  
+  # Audit Configuration
+  audit:
+    enabled: true
+    log-sensitive-operations: true
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.myemohealth: DEBUG
+    org.springframework.web: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/myemohealth.log
+    max-size: 10MB
+    max-history: 30
