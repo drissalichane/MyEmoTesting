@@ -60,9 +60,10 @@ public class TestService {
     }
 
     /**
-     * Submit answers and calculate score
+     * Submit answers using DTOs (from API)
      */
-    public TestInstance submitAnswers(Long testId, List<Answer> answers) {
+    public TestInstance submitAnswers(Long testId,
+            List<com.myemohealth.controller.TestController.AnswerSubmitDTO> answerDTOs) {
         TestInstance test = testInstanceRepository.findById(testId)
                 .orElseThrow(() -> new RuntimeException("Test not found"));
 
@@ -73,6 +74,33 @@ public class TestService {
         // Get all questions for this QCM
         List<QcmQuestion> questions = qcmQuestionRepository
                 .findByQcmTemplateIdOrderByPosition(test.getQcmTemplate().getId());
+
+        // Convert DTOs to Answer entities
+        List<Answer> answers = answerDTOs.stream()
+                .map(dto -> {
+                    QcmQuestion question = questions.stream()
+                            .filter(q -> q.getId().equals(dto.getQuestionId()))
+                            .findFirst()
+                            .orElseThrow(() -> new RuntimeException("Question not found: " + dto.getQuestionId()));
+
+                    return Answer.builder()
+                            .testInstance(test)
+                            .question(question)
+                            .selectedOptions(dto.getSelectedOptions())
+                            .valueNumeric(dto.getValueNumeric())
+                            .textResponse(dto.getTextResponse())
+                            .build();
+                })
+                .toList();
+
+        // Call the existing method with Answer entities
+        return submitAnswersInternal(test, answers, questions);
+    }
+
+    /**
+     * Submit answers and calculate score (internal method)
+     */
+    private TestInstance submitAnswersInternal(TestInstance test, List<Answer> answers, List<QcmQuestion> questions) {
 
         // Calculate score
         BigDecimal totalPoints = BigDecimal.ZERO;

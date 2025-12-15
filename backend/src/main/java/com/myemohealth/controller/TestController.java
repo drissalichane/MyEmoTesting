@@ -9,8 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import lombok.Data;
 
 /**
  * REST controller for test/QCM endpoints
@@ -150,14 +153,31 @@ public class TestController {
     }
 
     public static class SubmitTestRequest {
-        private List<Answer> answers;
+        private List<AnswerSubmitDTO> answers;
 
-        public List<Answer> getAnswers() {
+        public List<AnswerSubmitDTO> getAnswers() {
             return answers;
         }
 
-        public void setAnswers(List<Answer> answers) {
+        public void setAnswers(List<AnswerSubmitDTO> answers) {
             this.answers = answers;
         }
+    }
+
+    @Data
+    public static class AnswerSubmitDTO {
+        private QuestionRef question;
+        private Map<String, Object> selectedOptions;
+        private BigDecimal valueNumeric;
+        private String textResponse;
+
+        public Long getQuestionId() {
+            return question != null ? question.getId() : null;
+        }
+    }
+
+    @Data
+    public static class QuestionRef {
+        private Long id;
     }
 }

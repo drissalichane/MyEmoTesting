@@ -18,7 +18,6 @@ dependencies:
   intl: ^0.18.1
   flutter_svg: ^2.0.7
   glassmorphism: ^3.0.0
-  stomp_dart_client: ^1.0.0
   dash_chat_2: ^0.0.18
   speech_to_text: ^6.3.0
   flutter_tts: ^3.8.3

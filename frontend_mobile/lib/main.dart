@@ -5,7 +5,7 @@ import 'core/services/auth_service.dart';
 import 'features/auth/login_screen.dart';
 import 'features/home/dashboard_screen.dart';
 import 'features/tests/test_list_screen.dart';
-import 'features/chat/chat_screen.dart';
+import 'features/chat/doctor_list_screen.dart';
 import 'features/settings/settings_screen.dart';
 import 'core/theme/app_colors.dart';
 import 'package:flutter/cupertino.dart';
@@ -71,7 +71,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _screens = [
     const DashboardScreen(),
     const TestListScreen(),
-    const ChatScreen(),
+    const DoctorListScreen(),
     const SettingsScreen(),
   ];
 

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -25,6 +27,14 @@ public class ChatController {
     public void processMessage(@Payload ChatMessage message) {
         message.setTimestamp(LocalDateTime.now());
         chatService.saveAndSend(message);
+    }
+
+    // REST Endpoint: Send Message (for clients that can't use WebSocket)
+    @PostMapping("/send")
+    public ResponseEntity<ChatMessage> sendMessage(@RequestBody ChatMessage message) {
+        message.setTimestamp(LocalDateTime.now());
+        ChatMessage saved = chatService.saveAndSend(message);
+        return ResponseEntity.ok(saved);
     }
 
     // REST Endpoint: Get History
@@ -54,5 +64,40 @@ public class ChatController {
         }
 
         return ResponseEntity.ok(chatService.getConversation(userId1, userId2));
+    }
+
+    // REST Endpoint: Get all conversations for current user
+    @GetMapping("/conversations")
+    public ResponseEntity<?> getConversations() {
+        org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication();
+
+        String currentEmail = auth.getName();
+        java.util.Optional<com.myemohealth.entity.User> currentUserOpt = userRepository.findByEmail(currentEmail);
+
+        if (currentUserOpt.isEmpty()) {
+            return ResponseEntity.status(401).build();
+        }
+
+        return ResponseEntity.ok(chatService.getUserConversations(currentUserOpt.get().getId()));
+    }
+
+    // WebRTC Signaling Endpoints
+    @MessageMapping("/call/offer")
+    public void handleCallOffer(@Payload Map<String, Object> offer) {
+        Long recipientId = Long.valueOf(offer.get("recipientId").toString());
+        chatService.sendCallSignal(recipientId, "offer", offer);
+    }
+
+    @MessageMapping("/call/answer")
+    public void handleCallAnswer(@Payload Map<String, Object> answer) {
+        Long recipientId = Long.valueOf(answer.get("recipientId").toString());
+        chatService.sendCallSignal(recipientId, "answer", answer);
+    }
+
+    @MessageMapping("/call/ice-candidate")
+    public void handleIceCandidate(@Payload Map<String, Object> candidate) {
+        Long recipientId = Long.valueOf(candidate.get("recipientId").toString());
+        chatService.sendCallSignal(recipientId, "ice-candidate", candidate);
     }
 }
