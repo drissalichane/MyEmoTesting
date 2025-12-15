@@ -1,0 +1,32 @@
+.app-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.sidebar {
+    flex-shrink: 0;
+    z-index: 100;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 32px;
+    position: relative;
+
+    // Background pattern for depth
+    &::before {
+        content: '';
+        position: fixed;
+        top: -50%;
+        right: -20%;
+        width: 800px;
+        height: 800px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 183, 181, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+        z-index: -1;
+        pointer-events: none;
+    }
+}

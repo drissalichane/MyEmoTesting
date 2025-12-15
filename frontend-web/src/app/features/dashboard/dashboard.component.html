@@ -1,0 +1,88 @@
+<div class="dashboard-container">
+    <div class="header-section">
+        <h1>Dashboard</h1>
+        <p class="subtitle">Welcome back, Dr. {{ (authService.currentUser | async)?.lastName }}</p>
+    </div>
+
+    <div class="kpi-grid">
+        <div class="kpi-card primary">
+            <div class="icon-wrapper">
+                <mat-icon>people</mat-icon>
+            </div>
+            <div class="content">
+                <span class="label">Total Patients</span>
+                <span class="value">{{ stats.totalPatients }}</span>
+                <span class="trend positive">
+                    <mat-icon>trending_up</mat-icon>
+                    +12%
+                </span>
+            </div>
+        </div>
+
+        <div class="kpi-card accent">
+            <div class="icon-wrapper">
+                <mat-icon>assignment_turned_in</mat-icon>
+            </div>
+            <div class="content">
+                <span class="label">Tests Completed</span>
+                <span class="value">{{ stats.completedTests }}</span>
+                <span class="trend positive">
+                    <mat-icon>trending_up</mat-icon>
+                    +8%
+                </span>
+            </div>
+        </div>
+
+        <div class="kpi-card warning">
+            <div class="icon-wrapper">
+                <mat-icon>warning</mat-icon>
+            </div>
+            <div class="content">
+                <span class="label">Critical Cases</span>
+                <span class="value">{{ stats.criticalCases }}</span>
+                <span class="trend negative">
+                    <mat-icon>trending_down</mat-icon>
+                    -2
+                </span>
+            </div>
+        </div>
+
+        <div class="kpi-card info">
+            <div class="icon-wrapper">
+                <mat-icon>question_answer</mat-icon>
+            </div>
+            <div class="content">
+                <span class="label">Total Tests</span>
+                <span class="value">{{ stats.totalTests }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="charts-section">
+        <div class="chart-card glass-panel">
+            <div class="card-header">
+                <h3>Patient Progress Overview</h3>
+                <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <div class="chart-container">
+                <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="'line'">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="chart-card glass-panel">
+            <div class="card-header">
+                <h3>Test Distribution</h3>
+                <button mat-icon-button>
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </div>
+            <div class="doughnut-container">
+                <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" [type]="'doughnut'">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>

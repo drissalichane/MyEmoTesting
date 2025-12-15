@@ -1,0 +1,112 @@
+<div class="page-container" *ngIf="patient">
+    <div class="header-section">
+        <div class="user-info">
+            <div class="avatar-large">
+                {{ patient.firstName.charAt(0) }}{{ patient.lastName.charAt(0) }}
+            </div>
+            <div class="text-info">
+                <h1>{{ patient.firstName }} {{ patient.lastName }}</h1>
+                <p class="email">{{ patient.email }}</p>
+            </div>
+        </div>
+        <div class="actions">
+            <button mat-stroked-button color="primary">
+                <mat-icon>message</mat-icon>
+                Message
+            </button>
+            <button mat-flat-button color="primary" class="ml-2">
+                <mat-icon>videocam</mat-icon>
+                Video Call
+            </button>
+        </div>
+    </div>
+
+    <mat-tab-group class="glass-panel" animationDuration="0ms">
+        <mat-tab label="Overview & AI Analysis">
+            <div class="tab-content">
+                <div class="analysis-grid">
+                    <mat-card class="analysis-card">
+                        <mat-card-header>
+                            <mat-icon mat-card-avatar color="accent">psychology</mat-icon>
+                            <mat-card-title>AI Executive Summary</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p class="summary-text">{{ aiAnalysis.summary }}</p>
+                            <div class="risk-badge" [ngClass]="formatRisk(aiAnalysis.riskLevel)">
+                                Risk Level: {{ aiAnalysis.riskLevel }}
+                            </div>
+                        </mat-card-content>
+                    </mat-card>
+
+                    <mat-card class="analysis-card">
+                        <mat-card-header>
+                            <mat-icon mat-card-avatar color="primary">lightbulb</mat-icon>
+                            <mat-card-title>Recommendations</mat-card-title>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <mat-list>
+                                <mat-list-item *ngFor="let rec of aiAnalysis.recommendations">
+                                    <mat-icon matListItemIcon>check_circle_outline</mat-icon>
+                                    <div matListItemTitle>{{ rec }}</div>
+                                </mat-list-item>
+                            </mat-list>
+                        </mat-card-content>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Test History">
+            <div class="tab-content">
+                <div class="list-container">
+                    <div *ngIf="tests.length === 0" class="empty-state">
+                        <mat-icon>assignment</mat-icon>
+                        <p>No test results available for this user.</p>
+                    </div>
+                    <div class="list-item" *ngFor="let test of tests">
+                        <div class="item-icon">
+                            <mat-icon>assignment</mat-icon>
+                        </div>
+                        <div class="item-details">
+                            <h3>{{ test.templateTitle }}</h3>
+                            <span class="date">{{ test.submittedAt | date:'mediumDate' }}</span>
+                        </div>
+                        <div class="item-score">
+                            Score: <strong>{{ test.score != null ? test.score : 'N/A' }}</strong>
+                        </div>
+                        <button mat-icon-button>
+                            <mat-icon>chevron_right</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+
+        <mat-tab label="Voice Chat Sessions">
+            <div class="tab-content">
+                <div class="list-container">
+                    <p class="section-desc">Recorded sessions analyzed by AI (Transcript Private)</p>
+                    <div *ngIf="voiceChats.length === 0" class="empty-state">
+                        <mat-icon>mic_off</mat-icon>
+                        <p>No voice chat sessions available for this user.</p>
+                    </div>
+                    <div class="list-item" *ngFor="let chat of voiceChats">
+                        <div class="item-icon voice">
+                            <mat-icon>mic</mat-icon>
+                        </div>
+                        <div class="item-details">
+                            <h3>{{ chat.transcript || 'Voice Session' }}</h3>
+                            <span class="date">{{ chat.date }}</span>
+                        </div>
+                        <div class="item-sentiment">
+                            Sentiment: <span [class]="chat.sentiment.toLowerCase()">{{ chat.sentiment }}</span>
+                        </div>
+                        <button mat-icon-button>
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

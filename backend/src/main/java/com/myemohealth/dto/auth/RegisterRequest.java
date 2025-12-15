@@ -30,6 +30,8 @@ public class RegisterRequest {
     @NotBlank(message = "Last name is required")
     private String lastName;
 
+    private String role; // PATIENT, DOCTOR, or ADMIN
+
     private LocalDate dateNaissance;
 
     private String sexe;

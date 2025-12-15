@@ -18,6 +18,9 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    @Query("SELECT COUNT(u) FROM User u JOIN u.role r WHERE r.name = 'PATIENT'")
+    long countPatients();
+
     /**
      * Find user by UUID
      */

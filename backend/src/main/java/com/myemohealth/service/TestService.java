@@ -28,6 +28,7 @@ public class TestService {
     private final PhaseRepository phaseRepository;
     private final QcmQuestionRepository qcmQuestionRepository;
     private final AnswerRepository answerRepository;
+    private final PatientProfileRepository patientProfileRepository;
 
     private static final BigDecimal PASSING_SCORE = BigDecimal.valueOf(7.5);
     private static final BigDecimal MAX_SCORE = BigDecimal.valueOf(10.0);
@@ -36,8 +37,8 @@ public class TestService {
      * Start a new test
      */
     public TestInstance startTest(Long patientId, Long qcmId, Integer phaseId) {
-        User patient = userRepository.findById(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found"));
+        PatientProfile patient = patientProfileRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient profile not found"));
         QcmTemplate qcm = qcmTemplateRepository.findById(qcmId)
                 .orElseThrow(() -> new RuntimeException("QCM not found"));
         Phase phase = phaseRepository.findById(phaseId)
@@ -53,7 +54,9 @@ public class TestService {
                 .attemptNumber(1)
                 .build();
 
-        return testInstanceRepository.save(test);
+        TestInstance savedTest = testInstanceRepository.save(test);
+        initializeLazyFields(savedTest);
+        return savedTest;
     }
 
     /**
@@ -116,7 +119,9 @@ public class TestService {
             test.setTimeSpentSeconds((int) seconds);
         }
 
-        return testInstanceRepository.save(test);
+        TestInstance savedTest = testInstanceRepository.save(test);
+        initializeLazyFields(savedTest);
+        return savedTest;
     }
 
     /**
@@ -241,22 +246,67 @@ public class TestService {
      * Get test results
      */
     public TestInstance getTestResult(Long testId) {
-        return testInstanceRepository.findById(testId)
+        TestInstance test = testInstanceRepository.findById(testId)
                 .orElseThrow(() -> new RuntimeException("Test not found"));
+        initializeLazyFields(test);
+        return test;
     }
 
     /**
      * Get patient test history
      */
     public List<TestInstance> getPatientTests(Long patientId) {
-        return testInstanceRepository.findByPatientId(patientId);
+        List<TestInstance> tests = testInstanceRepository.findByPatientId(patientId);
+        tests.forEach(this::initializeLazyFields);
+        return tests;
     }
 
     /**
      * Get patient tests for a specific phase
      */
     public List<TestInstance> getPatientTestsByPhase(Long patientId, Integer phaseId) {
-        return testInstanceRepository.findByPatientIdAndPhaseId(patientId, phaseId);
+        List<TestInstance> tests = testInstanceRepository.findByPatientIdAndPhaseId(patientId, phaseId);
+        tests.forEach(this::initializeLazyFields);
+        return tests;
+    }
+
+    public List<TestInstance> getDoctorTests(Long doctorId) {
+        List<TestInstance> tests = testInstanceRepository.findByPatientDoctorId(doctorId);
+        tests.forEach(this::initializeLazyFields);
+        return tests;
+    }
+
+    public List<TestInstance> getDoctorTestsByEmail(String email) {
+        // Updated requirement: Doctors can see ALL tests, not just assigned ones.
+        List<TestInstance> tests = testInstanceRepository.findAllByOrderByCreatedAtDesc();
+        tests.forEach(this::initializeLazyFields);
+        return tests;
+    }
+
+    private void initializeLazyFields(TestInstance test) {
+        if (test == null)
+            return;
+
+        if (test.getPatient() != null) {
+            if (test.getPatient().getUser() != null) {
+                test.getPatient().getUser().getEmail(); // Force init
+            }
+            // Initialize doctor relationship
+            if (test.getPatient().getDoctor() != null) {
+                test.getPatient().getDoctor().getEmail(); // Force init doctor
+            }
+        }
+
+        if (test.getQcmTemplate() != null) {
+            test.getQcmTemplate().getTitle(); // Force init
+            if (test.getQcmTemplate().getCreator() != null) {
+                test.getQcmTemplate().getCreator().getEmail(); // Force init creator
+            }
+        }
+
+        if (test.getPhase() != null) {
+            test.getPhase().getLabel(); // Force init
+        }
     }
 
     // Basic CRUD methods
@@ -294,5 +344,41 @@ public class TestService {
 
     public void delete(TestInstance testInstance) {
         testInstanceRepository.delete(testInstance);
+    }
+
+    /**
+     * Validate if the patient can move to the next phase.
+     * Rule: Must pass 3 tests in the current phase with score >= 7.5
+     */
+    public boolean canAdvancePhase(Long patientId, Integer currentPhaseId) {
+        long passedTests = countPassedTestsByPatientAndPhase(patientId, currentPhaseId);
+        return passedTests >= 3;
+    }
+
+    /**
+     * Attempt to advance the patient's phase if criteria met.
+     */
+    /**
+     * Attempt to advance the patient's phase if criteria met.
+     */
+    public boolean checkAndAdvancePhase(Long patientId) {
+        PatientProfile profile = patientProfileRepository.findById(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient profile not found"));
+
+        Integer currentPhase = profile.getCurrentPhase();
+        if (currentPhase == null)
+            currentPhase = 1;
+
+        if (currentPhase >= 5) {
+            return false; // Max phase reached
+        }
+
+        if (canAdvancePhase(patientId, currentPhase)) {
+            profile.setCurrentPhase(currentPhase + 1);
+            patientProfileRepository.save(profile);
+            return true;
+        }
+
+        return false;
     }
 }

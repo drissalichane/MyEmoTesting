@@ -1,0 +1,106 @@
+@use 'styles/variables' as vars;
+@use 'styles/mixins' as mixins;
+
+.qcm-container {
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+
+    h1 {
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        color: vars.$text-light;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+}
+
+.templates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.template-card {
+    @include mixins.glass-card;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    @include mixins.hover-lift;
+    background: rgba(white, 0.6);
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 16px;
+
+        .category-icon {
+            color: vars.$primary;
+            font-size: 28px;
+            width: 28px;
+            height: 28px;
+        }
+
+        .category-badge {
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            background: rgba(vars.$primary, 0.1);
+            color: vars.$primary;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+    }
+
+    h3 {
+        margin: 0 0 8px 0;
+        font-size: 1.25rem;
+    }
+
+    .description {
+        color: vars.$text-light;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 24px;
+        flex: 1;
+    }
+
+    .card-actions {
+        display: flex;
+        gap: 8px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding-top: 16px;
+        margin-left: -8px; // Align buttons
+    }
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    @include mixins.flex-center;
+    flex-direction: column;
+    padding: 64px;
+    color: vars.$text-light;
+    text-align: center;
+
+    mat-icon {
+        font-size: 64px;
+        width: 64px;
+        height: 64px;
+        margin-bottom: 16px;
+        opacity: 0.5;
+    }
+
+    h3 {
+        margin: 0 0 8px 0;
+    }
+}

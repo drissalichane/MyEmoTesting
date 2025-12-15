@@ -1,9 +1,9 @@
 package com.myemohealth.controller;
 
+import com.myemohealth.entity.Answer;
 import com.myemohealth.entity.TestInstance;
 import com.myemohealth.service.TestService;
 import jakarta.validation.Valid;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,8 +77,7 @@ public class TestController {
             TestInstance test = testService.startTest(
                     request.getPatientId(),
                     request.getQcmId(),
-                    request.getPhaseId()
-            );
+                    request.getPhaseId());
             return ResponseEntity.status(HttpStatus.CREATED).body(test);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -112,16 +111,53 @@ public class TestController {
         return ResponseEntity.ok(test);
     }
 
+    @GetMapping("/doctor")
+    public ResponseEntity<List<TestInstance>> getDoctorTests() {
+        org.springframework.security.core.Authentication auth = org.springframework.security.core.context.SecurityContextHolder
+                .getContext().getAuthentication();
+        return ResponseEntity.ok(testService.getDoctorTestsByEmail(auth.getName()));
+    }
+
     // DTOs
-    @Data
     public static class StartTestRequest {
         private Long patientId;
         private Long qcmId;
         private Integer phaseId;
+
+        public Long getPatientId() {
+            return patientId;
+        }
+
+        public void setPatientId(Long patientId) {
+            this.patientId = patientId;
+        }
+
+        public Long getQcmId() {
+            return qcmId;
+        }
+
+        public void setQcmId(Long qcmId) {
+            this.qcmId = qcmId;
+        }
+
+        public Integer getPhaseId() {
+            return phaseId;
+        }
+
+        public void setPhaseId(Integer phaseId) {
+            this.phaseId = phaseId;
+        }
     }
 
-    @Data
     public static class SubmitTestRequest {
-        private List<com.myemohealth.entity.Answer> answers;
+        private List<Answer> answers;
+
+        public List<Answer> getAnswers() {
+            return answers;
+        }
+
+        public void setAnswers(List<Answer> answers) {
+            this.answers = answers;
+        }
     }
 }

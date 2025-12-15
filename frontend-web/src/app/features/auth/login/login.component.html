@@ -1,0 +1,53 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="logo-header">
+            <div class="logo-icon">
+                <mat-icon>psychology</mat-icon>
+            </div>
+            <h1>MyEmoHealth</h1>
+            <p class="subtitle">Admin & Doctor Portal</p>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-field">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="email" type="email" placeholder="doctor@example.com">
+                    <mat-icon matPrefix>email</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+                        Please enter a valid email
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-field">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword">
+                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="actions">
+                <button mat-flat-button class="primary-btn full-width" [disabled]="loginForm.invalid || isLoading">
+                    <mat-spinner diameter="20" *ngIf="isLoading; else loginText"></mat-spinner>
+                    <ng-template #loginText>Sign In</ng-template>
+                </button>
+            </div>
+
+            <div class="error-message" *ngIf="error">
+                <mat-icon>error_outline</mat-icon>
+                <span>{{ error }}</span>
+            </div>
+        </form>
+    </div>
+</div>

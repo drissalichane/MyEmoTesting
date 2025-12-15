@@ -1,0 +1,43 @@
+<div class="sidebar-container glass-sidebar">
+  <div class="logo-container">
+    <div class="logo-icon">
+      <mat-icon>psychology</mat-icon>
+    </div>
+    <span class="logo-text">MyEmoHealth</span>
+  </div>
+
+  <nav class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
+    </a>
+    
+    <a routerLink="/patients" routerLinkActive="active" class="nav-item">
+      <mat-icon>people</mat-icon>
+      <span>Patients</span>
+    </a>
+    
+    <a routerLink="/qcms" routerLinkActive="active" class="nav-item">
+      <mat-icon>assignment</mat-icon>
+      <span>QCMs</span>
+    </a>
+    
+    <a routerLink="/chat" routerLinkActive="active" class="nav-item">
+      <mat-icon>chat_bubble</mat-icon>
+      <span>Chat</span>
+    </a>
+  </nav>
+
+  <div class="user-profile" *ngIf="user$ | async as user">
+    <div class="avatar">
+      {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+    </div>
+    <div class="user-info">
+      <span class="name">{{ user.firstName }} {{ user.lastName }}</span>
+      <span class="role">{{ user.role }}</span>
+    </div>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
+</div>

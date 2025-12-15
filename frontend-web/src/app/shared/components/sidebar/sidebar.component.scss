@@ -1,0 +1,128 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.sidebar-container {
+    height: 100vh;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 16px;
+    color: white;
+
+    // Custom glass effect for sidebar (darker)
+    background: rgba($primary-dark, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 48px;
+    padding-left: 12px;
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: $gradient-accent;
+        border-radius: 12px;
+        @include flex-center;
+
+        mat-icon {
+            color: white;
+        }
+    }
+
+    .logo-text {
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    mat-icon {
+        transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transform: translateX(4px);
+    }
+
+    &.active {
+        background: rgba($accent, 0.2);
+        color: $accent;
+        font-weight: 600;
+
+        mat-icon {
+            color: $accent;
+        }
+    }
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    margin-top: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    .avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: $primary;
+        color: white;
+        @include flex-center;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .user-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .name {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .role {
+            font-size: 0.75rem;
+            color: $accent;
+        }
+    }
+
+    button {
+        color: rgba(255, 255, 255, 0.5);
+
+        &:hover {
+            color: white;
+        }
+    }
+}

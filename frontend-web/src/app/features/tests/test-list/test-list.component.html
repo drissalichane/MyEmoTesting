@@ -1,0 +1,74 @@
+<div class="page-container">
+    <div class="page-header">
+        <div class="title-section">
+            <h1>Test History</h1>
+            <p class="subtitle">Review patient test results and assessments</p>
+        </div>
+        <button mat-flat-button class="primary-btn" (click)="openAssignDialog()">
+            <mat-icon>add</mat-icon>
+            Assign Test
+        </button>
+    </div>
+
+    <div class="glass-panel table-container">
+        <div class="filters">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search tests...">
+            </mat-form-field>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Patient Column -->
+            <ng-container matColumnDef="patient">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient </th>
+                <td mat-cell *matCellDef="let row"> {{ row.patientName }} </td>
+            </ng-container>
+
+            <!-- Test Column -->
+            <ng-container matColumnDef="test">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Assessment </th>
+                <td mat-cell *matCellDef="let row"> {{ row.templateTitle }} </td>
+            </ng-container>
+
+            <!-- Score Column -->
+            <ng-container matColumnDef="score">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+                <td mat-cell *matCellDef="let row">
+                    <span class="score-badge" [ngClass]="{'high-risk': row.score > 15, 'medium-risk': row.score > 10}">
+                        {{ row.score }}
+                    </span>
+                </td>
+            </ng-container>
+
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Submitted </th>
+                <td mat-cell *matCellDef="let row"> {{ row.submittedAt | date:'mediumDate' }} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let row">
+                    <span class="status-badge completed">{{ row.status }}</span>
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button class="action-btn" (click)="viewResult(row.id)">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="test-row"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page"></mat-paginator>
+    </div>
+</div>

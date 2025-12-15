@@ -1,0 +1,41 @@
+@use 'styles/variables' as vars;
+
+@mixin shadow-md {
+    box-shadow: vars.$shadow-md;
+}
+
+@mixin glass-card {
+    background: rgba(vars.$white, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(vars.$white, 0.5);
+    box-shadow: vars.$shadow-md;
+    border-radius: vars.$radius-lg;
+}
+
+@mixin glass-sidebar {
+    background: rgba(vars.$primary-dark, 0.95);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-right: 1px solid rgba(vars.$white, 0.1);
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin hover-lift {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+    will-change: transform, box-shadow;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: vars.$shadow-lg;
+    }
+}
+
+@mixin smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

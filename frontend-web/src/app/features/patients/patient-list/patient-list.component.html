@@ -1,0 +1,73 @@
+<div class="page-container">
+    <div class="page-header">
+        <div class="title-section">
+            <h1>Patients</h1>
+            <p class="subtitle">Manage patient records and test history</p>
+        </div>
+        <button mat-flat-button class="primary-btn" (click)="openAddPatientDialog()">
+            <mat-icon>add</mat-icon>
+            New Patient
+        </button>
+    </div>
+
+    <div class="glass-panel table-container">
+        <div class="filters">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search patients...">
+            </mat-form-field>
+        </div>
+
+        <table mat-table [dataSource]="dataSource" matSort>
+            <!-- Avatar Column -->
+            <ng-container matColumnDef="avatar">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let patient">
+                    <div class="avatar-circle">
+                        {{ patient.firstName.charAt(0) }}{{ patient.lastName.charAt(0) }}
+                    </div>
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let patient">
+                    <span class="patient-name">{{ patient.firstName }} {{ patient.lastName }}</span>
+                </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell *matCellDef="let patient"> {{ patient.email }} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let patient">
+                    <span class="status-badge active">Active</span>
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let patient">
+                    <button mat-icon-button class="action-btn" (click)="viewPatient(patient.id!)">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button mat-icon-button class="action-btn">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="patient-row"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of patients"></mat-paginator>
+    </div>
+</div>

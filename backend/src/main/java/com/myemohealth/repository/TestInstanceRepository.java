@@ -22,10 +22,21 @@ public interface TestInstanceRepository extends JpaRepository<TestInstance, Long
      */
     Optional<TestInstance> findByUuid(UUID uuid);
 
+    @Query("SELECT t FROM TestInstance t WHERE t.patient.doctor.id = :doctorId ORDER BY t.createdAt DESC")
+    List<TestInstance> findByPatientDoctorId(@Param("doctorId") Long doctorId);
+
     /**
      * Find all test instances for a patient
      */
-    @Query("SELECT t FROM TestInstance t WHERE t.patient.id = :patientId ORDER BY t.createdAt DESC")
+    @Query("SELECT t FROM TestInstance t " +
+            "LEFT JOIN FETCH t.patient p " +
+            "LEFT JOIN FETCH p.user " +
+            "LEFT JOIN FETCH p.doctor " +
+            "LEFT JOIN FETCH t.qcmTemplate q " +
+            "LEFT JOIN FETCH q.creator " +
+            "LEFT JOIN FETCH t.phase " +
+            "WHERE t.patient.id = :patientId " +
+            "ORDER BY t.createdAt DESC")
     List<TestInstance> findByPatientId(@Param("patientId") Long patientId);
 
     /**
@@ -57,4 +68,15 @@ public interface TestInstanceRepository extends JpaRepository<TestInstance, Long
      */
     @Query("SELECT COUNT(t) FROM TestInstance t WHERE t.patient.id = :patientId AND t.phase.id = :phaseId AND t.status = 'PASSED'")
     long countPassedTestsByPatientIdAndPhaseId(@Param("patientId") Long patientId, @Param("phaseId") Integer phaseId);
+
+    @Query("SELECT COUNT(t) FROM TestInstance t WHERE t.score >= 15") // Assuming >=15 is critical
+    long countCriticalCases();
+
+    @Query("SELECT COUNT(t) FROM TestInstance t WHERE t.status = 'COMPLETED'")
+    long countCompletedTests();
+
+    /**
+     * Find all tests ordered by creation date
+     */
+    List<TestInstance> findAllByOrderByCreatedAtDesc();
 }

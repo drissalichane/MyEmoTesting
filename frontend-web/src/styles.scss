@@ -1,0 +1,104 @@
+// Import Angular Material theming
+@use '@angular/material' as mat;
+
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+:root {
+    --primary-dark: #{$primary-dark};
+    --primary-color: #{$primary};
+    --accent-color: #{$accent};
+    --background-color: #{$background};
+    --text-primary: #{$text-dark};
+    --text-secondary: #{$text-light};
+    --success-color: #{$success};
+    --danger-color: #{$danger};
+    --warning-color: #{$warning};
+    --primary-rgb: 1, 135, 144; // Manually derived from #018790 for rgba usage
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: $background;
+    color: $text-dark;
+    overflow-x: hidden;
+}
+
+// Global scrollbar styling
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba($primary, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+        background: rgba($primary, 0.5);
+    }
+}
+
+// Global component overrides
+.mat-mdc-card {
+    @include glass-card;
+    background-color: rgba($white, 0.8) !important;
+}
+
+.primary-btn {
+    background: $gradient-accent !important;
+    color: white !important;
+    border-radius: $radius-xl !important;
+    padding: 0 32px !important;
+    height: 48px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+    @include shadow-md;
+    @include hover-lift;
+}
+
+.glass-panel {
+    @include glass-card;
+    padding: 24px;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: $primary-dark;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+a {
+    color: $primary;
+    text-decoration: none;
+    @include smooth-transition;
+
+    &:hover {
+        color: $accent;
+    }
+}

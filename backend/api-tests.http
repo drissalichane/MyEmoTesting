@@ -1,0 +1,110 @@
+# Backend API Testing Script
+# Base URL: http://localhost:8082
+
+## Test 1: Register a Patient
+POST http://localhost:8082/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "patient1@test.com",
+  "password": "Test123!",
+  "firstName": "John",
+  "lastName": "Doe",
+  "role": "PATIENT"
+}
+
+###
+
+## Test 2: Register a Doctor
+POST http://localhost:8082/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "doctor1@test.com",
+  "password": "Test123!",
+  "firstName": "Jane",
+  "lastName": "Smith",
+  "role": "DOCTOR"
+}
+
+###
+
+## Test 3: Login as Patient
+POST http://localhost:8082/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "patient1@test.com",
+  "password": "Test123!"
+}
+
+###
+
+## Test 4: Login as Doctor
+POST http://localhost:8082/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "doctor1@test.com",
+  "password": "Test123!"
+}
+
+###
+
+## Test 5: Get Current User (requires JWT token)
+GET http://localhost:8082/api/users/me
+Authorization: Bearer {{token}}
+
+###
+
+## Test 6: Get All Users
+GET http://localhost:8082/api/users
+Authorization: Bearer {{token}}
+
+###
+
+## Test 7: Get All Patients
+GET http://localhost:8082/api/users/patients
+Authorization: Bearer {{token}}
+
+###
+
+## Test 8: Get All Doctors
+GET http://localhost:8082/api/users/doctors
+Authorization: Bearer {{token}}
+
+###
+
+## Test 9: Get User by ID
+GET http://localhost:8082/api/users/1
+Authorization: Bearer {{token}}
+
+###
+
+## Test 10: Update User
+PUT http://localhost:8082/api/users/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "firstName": "John Updated",
+  "lastName": "Doe Updated"
+}
+
+###
+
+## Test 11: Invalid Login
+POST http://localhost:8082/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "patient1@test.com",
+  "password": "WrongPassword"
+}
+
+###
+
+## Test 12: Access Protected Endpoint Without Token
+GET http://localhost:8082/api/users/me
+
+###

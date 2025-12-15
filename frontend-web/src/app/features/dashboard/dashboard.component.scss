@@ -1,0 +1,159 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.header-section {
+    margin-bottom: 32px;
+
+    h1 {
+        margin: 0;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        color: $text-light;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+}
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.kpi-card {
+    @include glass-card;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    @include hover-lift;
+    background: rgba($white, 0.6);
+
+    .icon-wrapper {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        @include flex-center;
+
+        mat-icon {
+            font-size: 28px;
+            width: 28px;
+            height: 28px;
+            color: white;
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+            font-size: 0.9rem;
+            color: $text-light;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: $text-dark;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+
+            mat-icon {
+                font-size: 16px;
+                width: 16px;
+                height: 16px;
+            }
+
+            &.positive {
+                color: $success;
+            }
+
+            &.negative {
+                color: $danger;
+            }
+        }
+    }
+
+    // Card Variants
+    &.primary {
+        .icon-wrapper {
+            background: $gradient-primary;
+        }
+    }
+
+    &.accent {
+        .icon-wrapper {
+            background: $gradient-accent;
+        }
+    }
+
+    &.warning {
+        .icon-wrapper {
+            background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+        }
+    }
+
+    &.info {
+        .icon-wrapper {
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+        }
+    }
+}
+
+.charts-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chart-card {
+    padding: 24px;
+    min-height: 400px;
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+
+        h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+.doughnut-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    @include flex-center;
+}

@@ -1,0 +1,44 @@
+<div class="qcm-container">
+    <div class="header-section">
+        <div class="title-group">
+            <h1>Assessment Templates</h1>
+            <p class="subtitle">Manage standard questionnaires and assessments</p>
+        </div>
+        <button mat-flat-button class="primary-btn" (click)="createTemplate()">
+            <mat-icon>add</mat-icon>
+            Create Template
+        </button>
+    </div>
+
+    <div class="templates-grid">
+        <div class="template-card" *ngFor="let template of templates">
+            <div class="card-header">
+                <mat-icon class="category-icon">assignment</mat-icon>
+                <span class="category-badge">{{ template.category }}</span>
+            </div>
+
+            <h3>{{ template.title }}</h3>
+            <p class="description">{{ template.description }}</p>
+
+            <div class="card-actions">
+                <button mat-raised-button color="accent" (click)="viewQuestions(template)">
+                    <mat-icon>quiz</mat-icon>
+                    View Questions
+                </button>
+                <button mat-icon-button color="primary" (click)="editTemplate(template)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteTemplate(template.id, template.title)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="templates.length === 0">
+            <mat-icon>library_books</mat-icon>
+            <h3>No Templates Found</h3>
+            <p>Create your first assessment template to get started.</p>
+        </div>
+    </div>
+</div>

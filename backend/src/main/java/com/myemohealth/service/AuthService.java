@@ -76,7 +76,7 @@ public class AuthService {
         }
 
         /**
-         * Register a new patient
+         * Register a new user (patient, doctor, or admin)
          */
         public AuthResponse register(RegisterRequest request) {
                 // Check if email already exists
@@ -84,9 +84,17 @@ public class AuthService {
                         throw new RuntimeException("Email already registered");
                 }
 
-                // Get patient role
-                Role patientRole = roleRepository.findByName("PATIENT")
-                                .orElseThrow(() -> new RuntimeException("Patient role not found"));
+                // Determine role (default to PATIENT if not specified)
+                String roleName = request.getRole() != null ? request.getRole().toUpperCase() : "PATIENT";
+
+                // Validate role
+                if (!roleName.equals("PATIENT") && !roleName.equals("DOCTOR") && !roleName.equals("ADMIN")) {
+                        throw new RuntimeException("Invalid role. Must be PATIENT, DOCTOR, or ADMIN");
+                }
+
+                // Get role from database
+                Role role = roleRepository.findByName(roleName)
+                                .orElseThrow(() -> new RuntimeException(roleName + " role not found in database"));
 
                 // Create user
                 User user = User.builder()
@@ -94,31 +102,33 @@ public class AuthService {
                                 .passwordHash(passwordEncoder.encode(request.getPassword()))
                                 .firstName(request.getFirstName())
                                 .lastName(request.getLastName())
-                                .role(patientRole)
+                                .role(role)
                                 .enabled(true)
                                 .emailVerified(false)
                                 .build();
 
                 user = userRepository.save(user);
 
-                // Create patient profile
-                PatientProfile profile = PatientProfile.builder()
-                                .userId(user.getId())
-                                .user(user)
-                                .dateNaissance(request.getDateNaissance())
-                                .sexe(request.getSexe())
-                                .currentPhase(1)
-                                .consentVoiceRecording(
-                                                request.getConsentVoiceRecording() != null
-                                                                ? request.getConsentVoiceRecording()
-                                                                : false)
-                                .consentDataSharing(request.getConsentDataSharing() != null
-                                                ? request.getConsentDataSharing()
-                                                : false)
-                                .build();
+                // Create patient profile only for PATIENT role
+                if ("PATIENT".equals(roleName)) {
+                        PatientProfile profile = PatientProfile.builder()
+                                        .userId(user.getId())
+                                        .user(user)
+                                        .dateNaissance(request.getDateNaissance())
+                                        .sexe(request.getSexe())
+                                        .currentPhase(1)
+                                        .consentVoiceRecording(
+                                                        request.getConsentVoiceRecording() != null
+                                                                        ? request.getConsentVoiceRecording()
+                                                                        : false)
+                                        .consentDataSharing(request.getConsentDataSharing() != null
+                                                        ? request.getConsentDataSharing()
+                                                        : false)
+                                        .build();
 
-                user.setPatientProfile(profile);
-                userRepository.save(user);
+                        user.setPatientProfile(profile);
+                        userRepository.save(user);
+                }
 
                 // Generate tokens
                 String accessToken = jwtUtil.generateAccessToken(

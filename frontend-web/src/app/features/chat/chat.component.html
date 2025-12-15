@@ -1,0 +1,80 @@
+<div class="chat-container">
+    <!-- Patients Sidebar -->
+    <div class="patients-sidebar glass-panel">
+        <div class="sidebar-header">
+            <h2>Conversations</h2>
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-icon matPrefix>search</mat-icon>
+                <input matInput placeholder="Search patients...">
+            </mat-form-field>
+        </div>
+
+        <div class="patients-list">
+            <div class="patient-item" *ngFor="let patient of patients"
+                [class.active]="selectedPatient?.id === patient.id" (click)="selectPatient(patient)">
+                <div class="avatar-circle">
+                    {{ patient.firstName.charAt(0) }}{{ patient.lastName.charAt(0) }}
+                </div>
+                <div class="patient-info">
+                    <span class="name">{{ patient.firstName }} {{ patient.lastName }}</span>
+                    <span class="last-message text-truncate">Click to start chatting</span>
+                </div>
+                <div class="status-indicator online"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="chat-area glass-panel">
+        <ng-container *ngIf="selectedPatient; else noSelection">
+            <div class="chat-header">
+                <div class="header-info">
+                    <div class="avatar-circle small">
+                        {{ selectedPatient.firstName.charAt(0) }}{{ selectedPatient.lastName.charAt(0) }}
+                    </div>
+                    <div class="user-details">
+                        <h3>{{ selectedPatient.firstName }} {{ selectedPatient.lastName }}</h3>
+                        <span class="status">Online</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button mat-icon-button (click)="startVideoCall()">
+                        <mat-icon>videocam</mat-icon>
+                    </button>
+                    <button mat-icon-button>
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container" #scrollContainer>
+                <div class="message-wrapper" *ngFor="let msg of messages" [class.sent]="isSentByMe(msg)">
+                    <div class="message-bubble">
+                        {{ msg.content }}
+                    </div>
+                    <span class="timestamp">{{ msg.timestamp | date:'shortTime' }}</span>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <mat-form-field appearance="outline" class="message-input">
+                    <input matInput placeholder="Type a message..." [(ngModel)]="newMessage"
+                        (keyup.enter)="sendMessage()">
+                    <button mat-icon-button matSuffix (click)="sendMessage()">
+                        <mat-icon class="send-icon">send</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+        <ng-template #noSelection>
+            <div class="no-selection-state">
+                <div class="icon-wrapper">
+                    <mat-icon>chat_bubble_outline</mat-icon>
+                </div>
+                <h3>Select a patient to start chatting</h3>
+                <p>Choose a conversation from the sidebar</p>
+            </div>
+        </ng-template>
+    </div>
+</div>

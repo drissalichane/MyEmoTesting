@@ -21,21 +21,24 @@ public interface QcmTemplateRepository extends JpaRepository<QcmTemplate, Long> 
      */
     Optional<QcmTemplate> findByUuid(UUID uuid);
 
+    @Query("SELECT q FROM QcmTemplate q LEFT JOIN FETCH q.creator")
+    List<QcmTemplate> findAll();
+
     /**
      * Find all active QCM templates
      */
-    @Query("SELECT q FROM QcmTemplate q WHERE q.isActive = true ORDER BY q.title")
+    @Query("SELECT q FROM QcmTemplate q LEFT JOIN FETCH q.creator WHERE q.isActive = true ORDER BY q.title")
     List<QcmTemplate> findActive();
 
     /**
      * Find QCM templates by category
      */
-    @Query("SELECT q FROM QcmTemplate q WHERE q.category = :category AND q.isActive = true ORDER BY q.title")
+    @Query("SELECT q FROM QcmTemplate q LEFT JOIN FETCH q.creator WHERE q.category = :category AND q.isActive = true ORDER BY q.title")
     List<QcmTemplate> findByCategory(@Param("category") String category);
 
     /**
      * Find QCM templates by creator
      */
-    @Query("SELECT q FROM QcmTemplate q WHERE q.creator.id = :creatorId ORDER BY q.createdAt DESC")
+    @Query("SELECT q FROM QcmTemplate q LEFT JOIN FETCH q.creator WHERE q.creator.id = :creatorId ORDER BY q.createdAt DESC")
     List<QcmTemplate> findByCreatorId(@Param("creatorId") Long creatorId);
 }

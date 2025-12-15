@@ -1,0 +1,97 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.auth-container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba($primary, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba($accent, 0.1) 0%, transparent 20%);
+}
+
+.auth-card {
+    @include glass-card;
+    width: 100%;
+    max-width: 420px;
+    padding: 48px 32px;
+    background: rgba($white, 0.85);
+    box-shadow: 0 20px 40px rgba(0, 84, 97, 0.1);
+}
+
+.logo-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+
+    .logo-icon {
+        width: 64px;
+        height: 64px;
+        background: $gradient-primary;
+        border-radius: 20px;
+        margin-bottom: 16px;
+        color: white;
+        @include flex-center;
+        box-shadow: 0 10px 20px rgba($primary-dark, 0.2);
+
+        mat-icon {
+            font-size: 32px;
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        color: $primary-dark;
+    }
+
+    .subtitle {
+        margin-top: 8px;
+        color: $text-light;
+        font-size: 0.95rem;
+    }
+}
+
+.form-field {
+    margin-bottom: 16px;
+
+    mat-icon {
+        color: $primary;
+    }
+}
+
+.actions {
+    margin-top: 24px;
+
+    button {
+        height: 52px !important;
+        font-size: 1rem !important;
+    }
+}
+
+.error-message {
+    margin-top: 24px;
+    padding: 12px;
+    background: rgba($danger, 0.1);
+    color: $danger;
+    border-radius: $radius-sm;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+
+    mat-icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.full-width {
+    width: 100%;
+}

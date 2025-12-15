@@ -1,0 +1,26 @@
+// Color Palette
+$primary-dark: #005461;
+$primary: #018790;
+$accent: #00B7B5;
+$background: #F4F4F4;
+$white: #FFFFFF;
+$text-dark: #333333;
+$text-light: #777777;
+$danger: #FF5252;
+$success: #4CAF50;
+$warning: #FFC107;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $primary-dark 0%, $primary 100%);
+$gradient-accent: linear-gradient(135deg, $primary 0%, $accent 100%);
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.12);
+
+// Radius
+$radius-sm: 8px;
+$radius-md: 16px;
+$radius-lg: 24px;
+$radius-xl: 32px;
