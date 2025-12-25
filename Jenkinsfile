@@ -3,11 +3,12 @@ pipeline {
 
     tools {
         maven 'maven'
-        jdk 'jdk17'
-        nodejs 'node20' // Ensure a NodeJS tool named 'node20' is configured in Jenkins
+        // JDK is assumed to be available on the agent
+        nodejs 'node' 
     }
 
     environment {
+        // This tool name "sonar-scanner" MUST be configured in Global Tool Configuration
         SCANNER_HOME = tool 'SonarQube-Server'
     }
 
@@ -15,7 +16,8 @@ pipeline {
         stage('Clone') {
             steps {
                 echo 'Cloning repository...'
-                checkout scm
+                // Explicit URL as requested
+                git branch: 'main', url: 'https://github.com/drissalichane/MyEmoTesting'
             }
         }
 
@@ -24,7 +26,6 @@ pipeline {
             steps {
                 dir('backend') {
                     echo 'Building Backend...'
-                    // Skipping tests for speed as requested, remove -DskipTests to run them
                     bat 'mvn clean package -DskipTests' 
                 }
             }
@@ -34,9 +35,10 @@ pipeline {
             steps {
                 dir('backend') {
                     echo 'Running SonarQube Analysis on Backend...'
-                    withSonarQubeEnv('SonarQube-Local') {
-                        // Maven Sonar Plugin
-                        bat 'mvn sonar:sonar -Dsonar.projectKey=myemohealth-backend -Dsonar.projectName="MyEmoHealth Backend"'
+                    // 'SonarQube-Backend' matches the Server Name in Configure System
+                    withSonarQubeEnv('SonarQube-Backend') {
+                        // Use sonar:sonar goal. The plugin is now defined in pom.xml.
+                        bat 'mvn sonar:sonar -Dsonar.projectKey=backend -Dsonar.projectName=backend'
                     }
                 }
             }
@@ -65,43 +67,13 @@ pipeline {
             steps {
                 dir('frontend-web') {
                     echo 'Running SonarQube Analysis on Frontend...'
-                    withSonarQubeEnv('SonarQube-Local') {
-                        // Generic Sonar Scanner for JS/TS
-                        // Sources: src/app
-                        bat "${SCANNER_HOME}\\bin\\sonar-scanner -Dsonar.projectKey=myemohealth-frontend -Dsonar.projectName=\"MyEmoHealth Frontend\" -Dsonar.sources=src -Dsonar.exclusions=**/node_modules/**"
+                    // 'SonarQube-Frontweb' matches the Server Name in Configure System
+                    withSonarQubeEnv('SonarQube-Frontweb') {
+                        // Use the scanner tool configured in environment variable
+                        bat "${SCANNER_HOME}\\bin\\sonar-scanner -Dsonar.projectKey=frontweb -Dsonar.projectName=frontweb -Dsonar.sources=src -Dsonar.exclusions=**/node_modules/**"
                     }
                 }
             }
         }
-
-        /* 
-        // --- DEPLOYMENT (SKIPPED FOR NOW) ---
-        stage('Build Docker Images') {
-            parallel {
-                stage('Build Backend Image') {
-                    steps {
-                        dir('backend') {
-                            bat 'docker build -t myemohealth/backend:latest .'
-                        }
-                    }
-                }
-                stage('Build Frontend Image') {
-                    steps {
-                        dir('frontend-web') {
-                            bat 'docker build -t myemohealth/frontend:latest .'
-                        }
-                    }
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                dir('deploy') {
-                    bat 'docker-compose up -d'
-                }
-            }
-        }
-        */
     }
 }
