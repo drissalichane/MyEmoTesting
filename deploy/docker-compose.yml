@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database for the App
+  postgres:
+    image: postgres:15-alpine
+    container_name: myemohealth-db
+    environment:
+      POSTGRES_DB: suiviemot
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Make sure these paths are correct relative to where you run this compose file
+      # In the pipeline, we run from 'deploy', so '../database' is correct if repo is checked out
+      - ../database/init-db.sql:/docker-entrypoint-initdb.d/01-init-db.sql
+      - ../database/seed-data.sql:/docker-entrypoint-initdb.d/02-seed-data.sql
+      - ../database/qcm-questions-seed.sql:/docker-entrypoint-initdb.d/04-qcm-questions.sql
+      - ../database/additional-qcms-seed.sql:/docker-entrypoint-initdb.d/05-additional-qcms.sql
+    networks:
+      - myemohealth-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    # Use the image built by Jenkins
+    image: myemohealth/backend:latest
+    container_name: myemohealth-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: suiviemot
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      JWT_SECRET: MyEmoHealth_Super_Secret_Key_Change_In_Production_2024!
+    ports:
+      - "8082:8080" # Map host 8082 to container 8080 (Spring Boot default)
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - myemohealth-network
+    volumes:
+      - backend_storage:/var/myemohealth/storage
+
+  # Frontend Web
+  web-admin:
+    # Use the image built by Jenkins
+    image: myemohealth/frontend:latest
+    container_name: myemohealth-web
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - myemohealth-network
+    environment:
+      API_URL: http://localhost:8082/api
+
+networks:
+  myemohealth-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  backend_storage:

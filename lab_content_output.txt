@@ -1,0 +1,347 @@
+##################################################
+STEP 1: 1 Aperçu du TP
+##################################################
+Aperçu du TP
+Ce TP met en place un pipeline CI/CD pour un projet Spring Boot :
+Récupération du code depuis GitHub
+Build Maven et tests
+Création d’une image Docker
+Lancement du conteneur
+Déclenchement automatique du pipeline à chaque push via GitHub Webhook et ngrok
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 2: 2 Objectifs pédagogiques
+##################################################
+Objectifs pédagogiques
+Comprendre la différence entre CI (Intégration Continue) et CD (Livraison/Déploiement Continu).
+Installer et configurer Jenkins sur une machine locale.
+Configurer Maven dans Jenkins.
+Créer un Pipeline Jenkins pour un projet Spring Boot + Docker.
+Exposer Jenkins local à Internet avec ngrok.
+Mettre en place un webhook GitHub déclenchant automatiquement le pipeline.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 3: 3 Prérequis
+##################################################
+Prérequis
+Windows 10/11
+Java JDK (17 ou 21) installé
+Git installé
+Docker Desktop installé et démarré
+Compte GitHub
+Accès Internet
+Remarque
+Jenkins doit pouvoir exécuter Docker. Si Jenkins tourne comme service Windows avec un autre compte, vérifier les droits.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 4: 4 Rappel simple : CI, CD et Pipeline
+##################################################
+Rappel simple : CI, CD et Pipeline
+Intégration Continue (CI)
+À chaque changement de code, une chaîne automatique :
+compile le projet,
+exécute les tests,
+signale les erreurs rapidement.
+Objectif : détecter les problèmes d’intégration le plus tôt possible.
+Livraison / Déploiement Continu (CD)
+Automatise la livraison sur des environnements (staging, production).
+Permet un déploiement répétable et fiable.
+Dans ce TP, la CD est illustrée par :
+la création automatique d’une image Docker,
+l’exécution d’un conteneur à la fin du pipeline.
+Pipeline CI/CD typique
+Commit/push dans GitHub.
+Jenkins détecte le changement.
+Build + tests.
+Création d’artefacts (jar, image Docker…).
+Déploiement vers un environnement (ici : conteneur Docker local).
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 5: 5 PARTIE A – Installation et première connexion à Jenkins
+##################################################
+PARTIE A – Installation et première connexion à Jenkins
+Tâche 1 : Installation de Jenkins
+Ouvrir la page officielle d’installation Jenkins (Windows).
+Télécharger l’installeur Windows (version stable).
+Lancer l’installeur et suivre l’assistant.
+Après installation, ouvrir dans un navigateur :
+http://localhost:8080 (ou le port choisi).
+Remarque
+En cas de message “Please wait while Jenkins is getting ready to work…”, attendre la fin de l’initialisation.
+Tâche 2 : Accès au Dashboard Jenkins
+Terminer la configuration initiale (mot de passe admin, plugins recommandés).
+Arriver sur le tableau de bord (Dashboard).
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 6: 6 PARTIE B – Configuration de Maven dans Jenkins
+##################################################
+PARTIE B – Configuration de Maven dans Jenkins
+Objectif : permettre au pipeline d’utiliser Maven sans configuration manuelle dans chaque job.
+Tâche 3 : Ouvrir la configuration des outils
+Dans Jenkins, ouvrir le menu Manage Jenkins.
+Cliquer sur Tools.
+Tâche 4 : Ajouter Maven
+Dans la section Maven installations, cliquer sur Add Maven.
+Donner comme nom, par exemple : maven.
+Cocher Install automatically.
+Choisir une version (ex. 3.9.6).
+Enregistrer.
+Remarque
+Le nom maven doit être identique à celui utilisé plus tard dans le pipeline :
+tools { maven 'maven' }.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 7: 7 PARTIE C – Préparation du projet Spring Boot
+##################################################
+PARTIE C – Préparation du projet Spring Boot
+Tâche 5 : Récupérer et tester le projet localement
+Cloner le dépôt de base :
+https://github.com/lachgar/jenkins.git
+Ouvrir un terminal dans le dossier du projet.
+Exécuter :
+mvn clean install
+Vérifier que la compilation et les tests passent.
+Remarque
+Si le projet se trouve dans un sous-dossier (ex : POV-JAVA), lancer Maven à l’intérieur de ce dossier.
+Tâche 6 : Publier le projet dans un dépôt GitHub personnel
+Créer un nouveau dépôt sur GitHub (par exemple first_test_jenkis).
+Lier le dépôt local au nouveau dépôt GitHub.
+Pousser le code (push) vers ce dépôt.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 8: 8 PARTIE D – Création d’un Pipeline Jenkins pour CI/CD
+##################################################
+PARTIE D – Création d’un Pipeline Jenkins pour CI/CD
+Tâche 7 : Créer un nouveau job Pipeline
+Depuis le Dashboard Jenkins, cliquer sur New Item.
+Choisir un nom (ex : my project).
+Sélectionner Pipeline.
+Valider (OK).
+Tâche 8 : Configurer le job Pipeline
+Dans l’écran de configuration du job :
+Ajouter une description courte (ex. “CI/CD Spring Boot + Docker”).
+Cocher GitHub project et renseigner l’URL du dépôt GitHub personnel.
+Aller dans la section Build Triggers :
+cocher GitHub hook trigger for GITScm polling.
+Dans la section Pipeline :
+choisir Pipeline script
+coller le script suivant (adapter au besoin) :
+pipeline {
+    agent any
+    tools {
+        maven 'maven'
+    }
+
+    stages {
+        stage('Git Clone') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: 'main']],
+                        userRemoteConfigs: [[url: 'https://github.com/lachgar/jenkins.git']]
+                    ])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'mvn clean install'
+            }
+        }
+
+        stage('Create Docker Image') {
+            steps {
+                bat 'docker build -t lachgar/pos .'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                script {
+                    bat "docker run --name test-pos -d -p 8585:8282 lachgar/pos"
+                }
+            }
+        }
+    }
+}
+Enregistrer (Save).
+Remarques
+Adapter la branche (main ou master) selon le dépôt.
+Adapter l’URL Git au dépôt personnel.
+Si un conteneur test-pos existe déjà, le docker run échoue. Il est possible d’ajouter avant une commande de nettoyage (ex : docker rm -f test-pos).
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 9: 9 PARTIE E – Lancer le pipeline et lire le résultat
+##################################################
+PARTIE E – Lancer le pipeline et lire le résultat
+Tâche 9 : Lancer un build manuel
+Ouvrir le job my project.
+Cliquer sur Build Now.
+Attendre la fin du pipeline.
+Observer la zone Stage View qui affiche les différentes étapes.
+Interprétation des étapes :
+Git Clone : récupération du code depuis GitHub.
+Build : exécution de mvn clean install.
+Create Docker Image : fabrication de l’image Docker lachgar/pos.
+Run : lancement du conteneur sur le port hôte 8585 (conteneur 8282).
+Remarque : build dans un sous-dossier
+Si le projet Maven est dans un sous-dossier (ex : POV-JAVA), l’étape Build peut être écrite ainsi :
+stage('Build') {
+    steps {
+        script {
+           // Se placer dans le dossier du projet avant de lancer Maven
+           dir('POV-JAVA') {
+              bat 'mvn clean install'
+           }
+        }
+   }
+}
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 10: 10 PARTIE F – ngrok + Webhook GitHub : déclenchement automatique
+##################################################
+PARTIE F – ngrok + Webhook GitHub : déclenchement automatique
+Problème
+Jenkins fonctionne en local (http://localhost:8080).
+GitHub ne peut pas appeler directement cette URL.
+Solution : ngrok crée un tunnel sécurisé et expose Jenkins via une URL publique.
+
+Étape 1 – Installation et configuration de ngrok
+Tâche 10 : Télécharger ngrok
+Aller sur https://ngrok.com/download.
+Télécharger la version Windows.
+Placer ngrok.exe dans un dossier, par exemple C:\ngrok.
+Tâche 11 : Ajouter ngrok dans le PATH (optionnel mais pratique)
+Ouvrir les Variables d’environnement Windows.
+Dans les variables système, éditer Path.
+Ajouter C:\ngrok.
+Valider.
+Tâche 12 : Récupérer et configurer l’authtoken
+Créer un compte sur le site ngrok (ou se connecter).
+Sur la page de connexion, récupérer la commande “add-authtoken”.
+Ouvrir un terminal et exécuter la commande :
+ngrok config add-authtoken <NGROK_AUTHTOKEN>
+Vérifier le message de confirmation.
+Remarque sécurité
+L’authtoken doit rester secret. Ne pas le publier dans un dépôt ou un rapport public.
+Tâche 13 : Créer le tunnel vers Jenkins
+Vérifier que Jenkins est accessible sur http://localhost:8080.
+Dans un terminal, lancer :
+ngrok http 8080
+Noter l’URL publique HTTPS, par exemple :
+https://1f36-196-64-173-133.ngrok-free.app
+Remarque
+À chaque redémarrage ngrok (plan gratuit), l’URL peut changer.
+Le webhook GitHub doit alors être mis à jour.
+
+Étape 2 – Créer un webhook dans GitHub
+Tâche 14 : Ajouter le webhook côté GitHub
+Ouvrir le dépôt GitHub contenant le projet.
+Aller dans Settings → Webhooks.
+Cliquer sur Add webhook.
+Remplir :
+Payload URL : https://<url-ngrok>/github-webhook/
+Content type : application/json
+Events : “Just the push event”
+Active : coché
+Enregistrer.
+Remarque
+Le chemin /github-webhook/ est celui attendu par Jenkins pour les hooks GitHub.
+
+Étape 3 – Configurer Jenkins pour intégrer GitHub
+Tâche 15 : Installer le plugin GitHub Integration
+Dans Jenkins, ouvrir Manage Jenkins.
+Cliquer sur Plugins.
+Onglet Available plugins.
+Rechercher “GitHub Integration”.
+Cocher le plugin “GitHub Integration Plugin for Jenkins”.
+Cliquer sur Install (redémarrage éventuel).
+Tâche 16 : Configurer l’URL Jenkins publiée (si disponible)
+Toujours dans Manage Jenkins, ouvrir System.
+Chercher la section liée à GitHub / GitHub Pull Requests.
+Dans Published Jenkins URL, saisir l’URL ngrok (sans /github-webhook/), par exemple :
+https://1f36-196-64-173-133.ngrok-free.app
+Enregistrer (Save).
+Remarque
+Cette URL permet à certains plugins GitHub de construire des liens corrects vers Jenkins.
+
+Étape 4 – Test complet du déclenchement automatique
+Tâche 17 : Modifier le code et pousser sur GitHub
+Ouvrir le code du projet dans l’IDE.
+Modifier un texte simple, par exemple dans un contrôleur :
+@GetMapping
+public String hello() {
+    return "Hello from New Test :)";
+}
+Committer la modification.
+Pousser (push) vers le dépôt GitHub.
+Dans GitHub, onglet Webhooks → Recent Deliveries, vérifier que :
+Un événement push est listé,
+Le statut HTTP est 200 (ou 302).
+Tâche 18 : Vérifier côté Jenkins
+Revenir dans Jenkins → Dashboard → job my project.
+Confirmer qu’un nouveau build a été déclenché automatiquement.
+Ouvrir la vue Stage View de ce build.
+Résultat attendu
+Le push vers GitHub déclenche le webhook.
+GitHub appelle l’URL ngrok, qui redirige vers Jenkins.
+Jenkins exécute le pipeline : Git Clone → Build → Create Docker Image → Run.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 11: 11 Résumé final
+##################################################
+Résumé final
+Ce TP a permis de :
+installer et configurer Jenkins sur Windows ;
+paramétrer Maven comme outil Jenkins ;
+créer un Pipeline Jenkins pour un projet Spring Boot + Docker ;
+exposer Jenkins avec ngrok pour le rendre accessible depuis Internet ;
+configurer un webhook GitHub pour déclencher automatiquement un build à chaque push ;
+interpréter le Stage View pour comprendre le déroulement du pipeline.
+← Étape précédente
+Étape suivante →
+Voir les questions
+
+
+

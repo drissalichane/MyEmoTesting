@@ -1,0 +1,489 @@
+##################################################
+STEP 1: 1 Objectifs pédagogiques
+##################################################
+Objectifs pédagogiques
+Mettre en place Jenkins et configurer les outils (JDK, Maven, SonarScanner).
+Déployer SonarQube via Docker Compose et créer des projets + tokens par microservice.
+Exposer Jenkins avec Ngrok et brancher GitHub via webhooks.
+Créer un job Pipeline Jenkins et écrire un script de pipeline multi-stages.
+Lancer/valider l’exécution (Jenkins, SonarQube, Docker) et vérifier le déclenchement par push.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 2: 2 Prérequis
+##################################################
+Prérequis
+Prérequis techniques (outils)
+JDK 17 (ou version compatible avec le projet) + variable JAVA_HOME.
+Maven (installé localement ou géré par Jenkins).
+Git (ligne de commande).
+Docker + Docker Compose.
+Jenkins (installation locale).
+SonarQube (déployé via Docker Compose) + PostgreSQL (dans le compose).
+Ngrok (compte + authtoken).
+Un compte GitHub (accès au dépôt du projet).
+Remarque : le pipeline fourni dans le rapport utilise bat (agents Windows) et des chemins Windows. Sur Linux, remplacer bat par sh et adapter les chemins.
+Prérequis de connaissances
+Git : clone, commit, push, notion de webhook.
+Java/Spring Boot : structure d’un projet, build Maven.
+Notions CI/CD : stages (build, analyse, déploiement), exécution automatique.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 3: 3 Contexte et architecture
+##################################################
+Contexte et architecture
+L’application est composée de 4 microservices : car, client, gateway, server_eureka (Eureka Server). Le pipeline CI/CD assure :
+CI : compilation Maven + analyse SonarQube (qualité, code smells, bugs, vulnérabilités).
+CD : déploiement des services dans des conteneurs via Docker Compose.
+Automatisation : Jenkins exécute le pipeline à chaque push/pull request via webhook GitHub exposé par Ngrok.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 4: 4 Scénario pédagogique
+##################################################
+Scénario pédagogique
+Objectif : construire un pipeline Jenkins qui :
+clone le dépôt GitHub,
+build les microservices avec Maven,
+exécute l’analyse SonarQube (au moins car + client, comme dans le script),
+déploie les microservices avec Docker Compose.
+À la fin du lab, un push sur GitHub déclenche automatiquement Jenkins, qui analyse le code dans SonarQube puis redéploie les conteneurs
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 5: 5 Étape 1 : Récupération du projet GitHub (dépôt multi-services)
+##################################################
+Étape 1 : Récupération du projet GitHub (dépôt multi-services)
+Introduction
+Récupérer le code source et repérer la structure multi-services (car, client, gateway, server_eureka, deploy).
+1.1 Cloner le dépôt
+Exécuter :
+git clone https://github.com/lachgar/jenkins2.git
+cd jenkins
+Le dépôt indiqué dans le rapport est : https://github.com/lachgar/jenkins2.git.
+
+Résultat attendu : un dossier local contenant les répertoires microservices.
+1.2 Vérifier la structure du dépôt
+Lister le contenu :
+ls
+# (ou sous Windows PowerShell)
+dir
+Chercher les dossiers :
+car/
+client/
+gateway/
+server_eureka/
+deploy/ (déploiement Docker Compose)
+Résultat attendu : chaque microservice contient un pom.xml.
+Astuce : repérer dès maintenant le dossier deploy/ : c’est lui qui sera utilisé par Jenkins au stage Docker Compose.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 6: 6 Étape 2 : Installation et configuration de Jenkins
+##################################################
+Étape 2 : Installation et configuration de Jenkins
+Introduction
+Installer Jenkins localement, puis préparer l’environnement d’exécution (JDK + Maven) côté Jenkins.
+2.1 Installer Jenkins
+Télécharger et installer Jenkins (Windows ou autre) via la documentation officielle mentionnée dans le rapport.
+
+Explication : l’installateur guide la configuration initiale. Vérifier que l’installation démarre bien et que Jenkins sera accessible ensuite via un navigateur. En cas de blocage, relancer l’installateur en mode administrateur.
+
+2.2 Choisir le type de service “LocalSystem”
+Pendant l’installation, sélectionner LocalSystem comme type de connexion initiale.
+
+Explication : ce choix lance Jenkins en tant que service Windows. Si un compte local/domaine est sélectionné par erreur, des problèmes de permissions peuvent apparaître (accès workspace, accès Docker, etc.).
+
+2.3 Choisir et tester le port Jenkins
+Spécifier un port, cliquer sur Tester le port, puis Next.
+
+Explication : le test confirme que le port est libre (souvent 8080). Si le port est déjà utilisé, choisir un autre port (ex. 8081) et noter la nouvelle URL Jenkins.
+
+2.4 Indiquer le chemin du JDK
+Renseigner le chemin local du JDK (ex. JDK 17), puis poursuivre l’installation.
+
+Explication : Jenkins doit connaître un JDK valide pour exécuter Maven/compilation. Un chemin incorrect provoque des erreurs de build (Java not found / JAVA_HOME).
+
+2.5 Configurer Maven dans Jenkins (Manage Jenkins → Tools)
+Aller dans Administrer Jenkins → Tools, puis ajouter une installation Maven : chemin local ou installation automatique.
+
+Explication : l’installation Maven (nommée ici maven) est référencée dans le pipeline (tools { maven 'maven' }). Si le nom ne correspond pas, le pipeline échoue au démarrage.
+
+Remarque : donner exactement le nom maven à l’installation Maven pour correspondre au script du pipeline.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 7: 7 Étape 3 : Installation / configuration de SonarQube
+##################################################
+Étape 3 : Installation / configuration de SonarQube
+Introduction
+Déployer SonarQube avec Docker Compose, puis créer un projet + token pour chaque microservice. Ensuite, déclarer ces serveurs SonarQube dans Jenkins.
+3.1 Créer un docker-compose.yml pour SonarQube
+Créer un fichier (par exemple sonarqube-compose.yml) avec la configuration indiquée dans le rapport :
+version: '3.9'
+services:
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9999:9000"
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://sonarqube-db:5432/sonarqube
+      - SONARQUBE_JDBC_USERNAME=sonar
+      - SONARQUBE_JDBC_PASSWORD=sonar_pass
+
+  sonarqube-db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=sonarqube
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar_pass
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  sonarqube_data:
+  postgres_data:
+Résultat attendu : un fichier YAML valide, prêt à être lancé.
+Astuce : 9999:9000 signifie : accès SonarQube via http://localhost:9999.
+3.2 Démarrer SonarQube
+Exécuter :
+docker compose -f sonarqube-compose.yml up -d
+docker ps
+Résultat attendu : deux conteneurs démarrés : SonarQube + Postgres.
+3.3 Configurer SonarScanner dans Jenkins (Manage Jenkins → Tools)
+Ajouter SonarQube Scanner dans la section Tools (comme indiqué par la figure du rapport).
+
+Explication : ce scanner permet à Jenkins de déclencher l’analyse. Sans scanner/plug-in, l’étape withSonarQubeEnv(...) peut échouer ou ne pas injecter les variables nécessaires.
+
+3.4 Créer les projets SonarQube et générer les tokens
+Dans SonarQube (http://localhost:9999) :
+Créer un projet car
+Créer un projet client
+(Optionnel) créer gateway et server_eureka si une analyse est ajoutée plus tard
+Générer un token pour chaque projet (par projet ou par utilisateur)
+Résultat attendu : 2 tokens minimum : car token et client token (noms libres, contenu = chaîne secrète).
+Remarque : le script de pipeline du rapport analyse explicitement car et client (projectKey car et client).
+3.5 Déclarer les serveurs SonarQube dans Jenkins (Manage Jenkins → System)
+Aller dans Administrer Jenkins → System, puis section SonarQube servers.
+Créer deux entrées :
+Nom : SonarQube-Car ; URL : http://localhost:9999 ; Token : token du projet car
+Nom : SonarQube-Client ; URL : http://localhost:9999 ; Token : token du projet client
+
+Explication : cet écran centralise les intégrations (SonarQube, GitHub, etc.). Vérifier que la section “SonarQube servers” est visible (plugin installé).
+
+Explication : les noms SonarQube-Car et SonarQube-Client doivent correspondre au pipeline (withSonarQubeEnv('SonarQube-Car')). Si le nom ne correspond pas, l’analyse échoue immédiatement.
+
+
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 8: 8 Étape 4 : Exposition de Jenkins via Ngrok et configuration des Webhooks GitHub
+##################################################
+Étape 4 : Exposition de Jenkins via Ngrok et configuration des Webhooks GitHub
+Introduction
+Jenkins local doit recevoir des notifications GitHub. Ngrok fournit une URL publique temporaire vers le port Jenkins.
+4.1 Installer Ngrok et associer un authtoken
+Après création du compte Ngrok, exécuter :
+ngrok config add-authtoken <token>
+
+Explication : l’authtoken lie la machine au compte Ngrok. Sans cela, le tunnel peut être instable/limité et l’URL peut changer trop souvent. Vérifier le message confirmant l’enregistrement de la config.
+
+4.2 Lancer un tunnel HTTP vers Jenkins (port 8080)
+Exécuter :
+ngrok http http://localhost:8080
+
+Explication : Ngrok affiche les URLs publiques (https). C’est cette URL qui sera utilisée côté GitHub webhook. Si Jenkins n’est pas sur 8080, remplacer par le port choisi à l’installation.
+
+4.3 Copier l’URL publique Ngrok
+Repérer l’URL du type https://xxxx.ngrok-free.app (ou équivalent).
+
+Explication : cette URL change si Ngrok est relancé (plan gratuit). En cas de changement, mettre à jour le webhook GitHub, sinon GitHub enverra vers une ancienne URL (échecs 404/timeout).
+
+4.4 Déclarer l’URL du dépôt GitHub dans Jenkins (section GitHub Pull Requests / GitHub)
+Dans Administrer Jenkins → System, compléter la zone associée à GitHub (ex. “GitHub Pull Requests / Published Jenkins URL / Project url”, selon plugins). Le rapport montre l’ajout de l’URL du dépôt.
+
+
+Explication : cette configuration aide Jenkins à relier les jobs au dépôt (liens, triggers, PR/webhook selon plugin). Une URL erronée peut empêcher le déclenchement automatique.
+
+4.5 Créer un Webhook GitHub pointant vers Jenkins
+Dans GitHub :
+Ouvrir le dépôt → Settings → Webhooks
+Add webhook
+Remplir :
+Payload URL : https://<URL_NGROK>/github-webhook/
+Content type : application/json
+Which events : “Just the push event” (minimum)
+Activer le webhook
+
+Explication : cet écran liste les webhooks du dépôt. Vérifier que le bon dépôt est utilisé (éviter de configurer le webhook sur un fork non utilisé).
+
+
+Explication : l’URL doit viser l’endpoint Jenkins github-webhook. Une faute de frappe ou une ancienne URL Ngrok entraîne des “delivery failed”. Vérifier le bouton “Update webhook” et le statut “Active”.
+
+Astuce : dans GitHub Webhooks → onglet “Recent Deliveries”, vérifier un code 200 après un push.
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 9: 9 Étape 5 : Création du Job Pipeline Jenkins
+##################################################
+Étape 5 : Création du Job Pipeline Jenkins
+Introduction
+Créer un job de type Pipeline, le relier au dépôt GitHub et activer le trigger webhook.
+5.1 Créer un nouveau job “Pipeline”
+Dans Jenkins : Tableau de bord → Nouveau Item → sélectionner Pipeline.
+
+
+
+Explication : cet écran initialise le job. Le nom doit être explicite (ex. cicd-microservices). Un mauvais type de job (Freestyle) complique l’intégration du Jenkinsfile/pipeline script.
+
+
+5.2 Relier le job au projet GitHub + activer le trigger
+Dans la configuration du job :
+Cocher GitHub project puis coller l’URL du dépôt
+Dans Build Triggers, cocher GitHub hook trigger for GITScm polling
+
+Explication : ce trigger permet à Jenkins de se lancer quand GitHub appelle le webhook. Si non coché, Jenkins ne démarre pas automatiquement après un push (sauf lancement manuel).
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 10: 10 Étape 6 : Détail du script de pipeline Jenkins
+##################################################
+Étape 6 : Détail du script de pipeline Jenkins
+Introduction
+Saisir le pipeline qui enchaîne : clonage → build + analyse SonarQube (en parallèle) → déploiement Docker Compose.
+
+6.1 Ajouter le pipeline script dans le job
+Dans la configuration du job :
+Section Pipeline → “Definition” = Pipeline script
+Coller le script ci-dessous (adapté du rapport)
+
+Explication : vérifier que “Pipeline script” (pas “Pipeline script from SCM”) est sélectionné si le script est collé directement. En cas d’erreur Groovy, Jenkins l’affiche dès la première exécution.
+
+
+6.2 Script de pipeline (repris du rapport, commenté)
+Le script ci-dessous est celui du rapport, structuré pour être lisible en TP. Il utilise bat (Windows).
+
+
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven'
+    }
+
+    stages {
+
+        stage('Cloner le dépôt') {
+            steps {
+                echo 'Clonage du dépôt GitHub...'
+                git branch: 'main', url: 'https://github.com/ZouizzaKhalil/jenkins.git'
+            }
+        }
+
+        stage('Build and SonarQube Analysis') {
+            parallel {
+
+                stage('Car Service') {
+                    stages {
+
+                        stage('Build Car Service') {
+                            steps {
+                                dir('car') {
+                                    echo 'Compilation et génération du service Car...'
+                                    script {
+                                        bat 'mvn clean install -DskipTests'
+                                    }
+                                }
+                            }
+                        }
+
+                        stage('SonarQube Analysis Car Service') {
+                            steps {
+                                dir('car') {
+                                    script {
+                                        def mvn = tool 'maven';
+                                        withSonarQubeEnv('SonarQube-Car') {
+                                            bat "${mvn}\\bin\\mvn clean verify ^ " +
+                                                "sonar:sonar ^ " +
+                                                "-Dsonar.projectKey=car ^ " +
+                                                "-Dsonar.projectName='car' ^ " +
+                                                "-DskipTests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('Client Service') {
+                    stages {
+
+                        stage('Build Client Service') {
+                            steps {
+                                dir('client') {
+                                    echo 'Compilation et génération du service Client...'
+                                    script {
+                                        bat 'mvn clean install -DskipTests'
+                                    }
+                                }
+                            }
+                        }
+
+                        stage('SonarQube Analysis Client Service') {
+                            steps {
+                                dir('client') {
+                                    script {
+                                        def mvn = tool 'maven';
+                                        withSonarQubeEnv('SonarQube-Client') {
+                                            bat "${mvn}\\bin\\mvn clean verify ^ " +
+                                                "sonar:sonar ^ " +
+                                                "-Dsonar.projectKey=client ^ " +
+                                                "-Dsonar.projectName='client' ^ " +
+                                                "-DskipTests"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                stage('Gateway Service') {
+                    steps {
+                        dir('gateway') {
+                            echo 'Compilation et génération du service Gateway...'
+                            script {
+                                bat 'mvn clean install -DskipTests'
+                            }
+                        }
+                    }
+                }
+
+                stage('Eureka Server') {
+                    steps {
+                        dir('server_eureka') {
+                            echo 'Compilation et génération du serveur Eureka...'
+                            script {
+                                bat 'mvn clean install -DskipTests'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Docker Compose') {
+            steps {
+                dir('deploy') {
+                    echo 'Création et déploiement des conteneurs Docker...'
+                    script {
+                        bat 'docker-compose up -d --build'
+                    }
+                }
+            }
+        }
+    }
+}
+Explication pédagogique (lecture du script)
+tools { maven 'maven' } : utilise l’installation Maven déclarée dans Jenkins (Étape 2.5).
+stage('Cloner le dépôt') : récupère la branche main du dépôt GitHub.
+parallel { ... } : exécute plusieurs builds/analyses en même temps pour gagner du temps.
+withSonarQubeEnv('SonarQube-Car') : injecte l’URL + token SonarQube configurés (Étape 3.5).
+docker-compose up -d --build : rebuild et redémarre les services conteneurisés à partir du dossier deploy/.
+Remarque : le rapport compile gateway et eureka mais n’exécute pas d’analyse SonarQube pour ces deux services. Pour ajouter l’analyse, dupliquer le modèle “car/client” avec withSonarQubeEnv(...) et des projectKey distincts.
+Astuce : si Docker n’est pas accessible depuis Jenkins (service Windows), exécuter Jenkins avec un utilisateur ayant accès à Docker, sinon docker-compose échoue (permission denied / cannot connect to daemon).
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 11: 11 Étape 7 : Exécution du pipeline et vérifications
+##################################################
+Étape 7 : Exécution du pipeline et vérifications
+Introduction
+Vérifier le bon fonctionnement de bout en bout : Jenkins (pipeline ok), SonarQube (dashboards), Docker (conteneurs up), et déclenchement automatique via push.
+7.1 Lancer un build manuel
+Dans Jenkins : ouvrir le job → Build Now.
+Résultat attendu : une exécution apparaît dans l’historique, avec console log accessible.
+7.2 Vérifier le résultat dans Jenkins
+Ouvrir Console Output et contrôler :
+stage clonage : checkout main
+builds Maven : succès sur car/client/gateway/server_eureka
+SonarQube : exécution sonar:sonar sur car et client
+Docker Compose : up -d --build exécuté
+Remarque : si un stage est rouge, lire la première erreur Maven/Sonar/Docker dans la console (souvent un problème de chemin, de token, ou de service Docker).
+7.3 Vérifier les tableaux de bord SonarQube
+Aller sur SonarQube : http://localhost:9999
+Ouvrir projet car → vérifier qu’une analyse récente existe
+Ouvrir projet client → vérifier idem
+Résultat attendu : des métriques (bugs, vulnérabilités, code smells) et un “Last analysis” récent.
+7.4 Vérifier le déploiement Docker Compose
+Sur la machine hôte :
+docker ps
+Résultat attendu : conteneurs démarrés (au minimum les services déployés par le compose du dossier deploy/).
+
+
+Optionnel : tester les services (adapter les ports réels du deploy/docker-compose.yml) :
+# Exemple générique (à adapter)
+curl http://localhost:<port_gateway>/actuator/health
+curl http://localhost:<port_car>/actuator/health
+7.5 Tester le déclenchement automatique via push GitHub
+Faire une petite modification (ex. README), commit, push :
+git add README.md
+git commit -m "test: déclenchement webhook"
+git push
+Résultat attendu : Jenkins démarre automatiquement une nouvelle exécution après le push. Le rapport indique que le pipeline s’exécute après chaque push ou pull request.
+
+Explication : vérifier l’apparition d’un nouveau build dans l’historique. Si rien ne se lance, contrôler : URL Ngrok actuelle, webhook GitHub actif, trigger Jenkins coché.
+
+
+← Étape précédente
+Étape suivante →
+
+
+
+##################################################
+STEP 12: 12 (Optionnel) Check-list de dépannage rapide
+##################################################
+(Optionnel) Check-list de dépannage rapide
+Jenkins ne se lance pas : port occupé → changer le port (Étape 2.3).
+SonarQube inaccessible : vérifier docker ps et le port 9999.
+Analyse SonarQube échoue : nom withSonarQubeEnv('...') ≠ nom déclaré dans Jenkins System.
+Webhook GitHub “failed” : URL Ngrok changée → mettre à jour Payload URL.
+Docker Compose échoue dans Jenkins : Jenkins n’a pas accès au daemon Docker (droits/service).
+← Étape précédente
+Étape suivante →
+Voir les questions
+
+
+
