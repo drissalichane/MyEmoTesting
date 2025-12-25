@@ -56,3 +56,14 @@ setTimeout(() => {
         role: 'PATIENT'
     });
 }, 1000);
+
+// E2E Test User (Dedicated for automated tests)
+setTimeout(() => {
+    registerUser({
+        email: 'e2e_doctor@example.com',
+        password: 'password123',
+        firstName: 'E2E',
+        lastName: 'Tester',
+        role: 'DOCTOR'
+    });
+}, 2000);

@@ -1,0 +1,3 @@
+com\myemohealth\e2e\tests\LoginTest.class
+com\myemohealth\e2e\pages\LoginPage.class
+com\myemohealth\e2e\pages\BasePage.class
