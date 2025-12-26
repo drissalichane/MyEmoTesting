@@ -38,8 +38,8 @@ public class LoginTest {
 
     @Test
     public void testLoginSuccess() {
-        // Using credentials found in create_demo_users.js
-        loginPage.login("e2e_doctor@example.com", "password123");
+        // Using valid credentials
+        loginPage.login("testpatient@test.com", "12345678");
 
         // Assertion: We expect to be redirected or at least no longer see the login
         // form/ERROR

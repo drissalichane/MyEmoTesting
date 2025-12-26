@@ -35,6 +35,15 @@ public class LoginPage extends BasePage {
         enterEmail(email);
         enterPassword(password);
         clickLogin();
+        try {
+            wait.until(ExpectedConditions.urlContains("dashboard"));
+        } catch (Exception e) {
+            // Log or ignore if specific test handles verification,
+            // but for general helper it's good to wait.
+            // If login fails (e.g. invalid creds), this will timeout.
+            // We might want to allow failing/checking error in test,
+            // but for 'login' helper, success is usually implied.
+        }
     }
 
     public String getErrorMessage() {
@@ -47,5 +56,9 @@ public class LoginPage extends BasePage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void clickSignupLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".register-link a"))).click();
     }
 }

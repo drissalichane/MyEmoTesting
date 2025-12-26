@@ -67,11 +67,6 @@ try {
     Wait-For-Port 8082 "Backend"
     Wait-For-Port 4200 "Frontend"
 
-    # 3b. Create Demo Users (Ensure they exist)
-    Write-Host "Creating demo users..."
-    # Copy script to temp or just run it from backend if node is available
-    Start-Process -FilePath "node" -ArgumentList "create_demo_users.js" -WorkingDirectory "../backend" -NoNewWindow -Wait
-
     # 4. Run Tests
     Write-Host "Running E2E Tests..."
     mvn test
@@ -87,3 +82,42 @@ finally {
     if ($backend) { Stop-Process -Id $backend.Id -Force -ErrorAction SilentlyContinue }
     if ($frontend) { Stop-Process -Id $frontend.Id -Force -ErrorAction SilentlyContinue }
 }
+
+<#
+================================================================================
+E2E TEST SCENARIO DOCUMENTATION
+================================================================================
+
+This script executes the following End-to-End (E2E) test suites covering critical application flows:
+
+1. Login Flows (LoginTest.java)
+   - Valid Login: Verifies successful authentication and redirection to Dashboard.
+   - Invalid Login: Verifies error messages for incorrect credentials.
+   - Logout: Confirms secure session termination.
+
+2. Advanced Workflows (AdvancedFlowTest.java)
+   - QCM Creation Flow:
+     - Log in as a specific user (Patient/Doctor).
+     - Navigate to QCM Management.
+     - Create a new QCM Template with title, description, and category.
+     - Add a question to the template via the Question Editor dialog.
+     - Verify usage of success alerts and dialog interactions.
+   - Signup Flow:
+     - Register a new user with valid credentials (password > 8 chars).
+     - Verify redirection to Login page.
+     - Confirm successful login with the newly created account.
+
+3. Complete User Journey (FullFlowTest.java)
+   - Integrated test simulating a complete user session:
+     - Login -> Dashboard -> Patient List -> Logout.
+
+4. Component Tests
+   - DashboardPage: Verifies visibility of key statistics and charts.
+   - PatientListPage: Verifies operation of the patient data table (loading, rows).
+
+RESULTS INTERPRETATION:
+- PASS: All scenarios executed successfully. Feature is stable.
+- FAIL: Check 'e2e-tests/target/surefire-reports' for XML/TXT logs.
+  - Common issues: TimeoutException (element not found), ElementClickIntercepted (overlay issues).
+================================================================================
+#>

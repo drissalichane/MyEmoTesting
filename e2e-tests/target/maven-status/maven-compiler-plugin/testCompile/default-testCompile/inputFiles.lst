@@ -2,5 +2,9 @@ C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e
 C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\DashboardPage.java
 C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\LoginPage.java
 C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\PatientListPage.java
+C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\QcmPage.java
+C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\SidebarPage.java
+C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\pages\SignupPage.java
+C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\tests\AdvancedFlowTest.java
 C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\tests\FullFlowTest.java
 C:\Users\grandy\projects\MyEmoHealth\e2e-tests\src\test\java\com\myemohealth\e2e\tests\LoginTest.java
