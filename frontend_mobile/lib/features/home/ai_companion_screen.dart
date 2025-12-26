@@ -48,6 +48,7 @@ class _AiCompanionScreenState extends State<AiCompanionScreen> {
       if (_speechAvailable) {
         setState(() => _isListening = true);
         _speech.listen(
+          localeId: "en_US",
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
           }),

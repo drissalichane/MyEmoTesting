@@ -25,8 +25,8 @@ pipeline {
                         stage('Backend Build') {
                             steps {
                                 dir('backend') {
-                                    echo 'Building Backend...'
-                                    bat 'mvn clean package -DskipTests'
+                                    echo 'Building Backend (with Tests for Coverage)...'
+                                    bat 'mvn clean package'
                                 }
                             }
                         }

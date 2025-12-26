@@ -18,7 +18,7 @@
 [INFO] skip non existing resourceDirectory C:\Users\grandy\projects\MyEmoHealth\backend\src\test\resources
 [INFO] 
 [INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ myemohealth-backend ---
-[INFO] No sources to compile
+[INFO] Nothing to compile - all classes are up to date
 [INFO] 
 [INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ myemohealth-backend <<<
 [INFO] 
@@ -34,104 +34,105 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.0)
 
-2025-12-25 16:34:48 - Starting MyEmoHealthApplication using Java 23.0.2 with PID 18984 (C:\Users\grandy\projects\MyEmoHealth\backend\target\classes started by grandy in C:\Users\grandy\projects\MyEmoHealth\backend)
-2025-12-25 16:34:48 - Running with Spring Boot v3.2.0, Spring v6.1.1
-2025-12-25 16:34:48 - No active profile set, falling back to 1 default profile: "default"
-2025-12-25 16:34:48 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2025-12-25 16:34:48 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2025-12-25 16:34:50 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-12-25 16:34:50 - Finished Spring Data repository scanning in 220 ms. Found 12 JPA repository interfaces.
-2025-12-25 16:34:57 - Tomcat initialized with port 8082 (http)
-2025-12-25 16:34:57 - Starting service [Tomcat]
-2025-12-25 16:34:57 - Starting Servlet engine: [Apache Tomcat/10.1.16]
-2025-12-25 16:34:57 - Initializing Spring embedded WebApplicationContext
-2025-12-25 16:34:57 - Root WebApplicationContext: initialization completed in 9154 ms
-2025-12-25 16:34:57 - Filter 'jwtAuthenticationFilter' configured for use
-2025-12-25 16:34:57 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-12-25 16:34:58 - HHH000412: Hibernate ORM core version 6.3.1.Final
-2025-12-25 16:34:58 - HHH000026: Second-level cache disabled
-2025-12-25 16:34:58 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-12-25 16:34:58 - HikariPool-1 - Starting...
-2025-12-25 16:34:59 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@19fa6202
-2025-12-25 16:34:59 - HikariPool-1 - Start completed.
-2025-12-25 16:34:59 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2025-12-25 16:35:03 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-12-25 16:35:03 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-12-25 16:35:04 - Hibernate is in classpath; If applicable, HQL parser will be used.
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:37 - Starting MyEmoHealthApplication using Java 23.0.2 with PID 26444 (C:\Users\grandy\projects\MyEmoHealth\backend\target\classes started by grandy in C:\Users\grandy\projects\MyEmoHealth\backend)
+2025-12-26 03:05:37 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2025-12-26 03:05:37 - No active profile set, falling back to 1 default profile: "default"
+2025-12-26 03:05:37 - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-26 03:05:37 - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-26 03:05:39 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-26 03:05:39 - Finished Spring Data repository scanning in 199 ms. Found 12 JPA repository interfaces.
+2025-12-26 03:05:44 - Tomcat initialized with port 8082 (http)
+2025-12-26 03:05:44 - Starting service [Tomcat]
+2025-12-26 03:05:44 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2025-12-26 03:05:44 - Initializing Spring embedded WebApplicationContext
+2025-12-26 03:05:44 - Root WebApplicationContext: initialization completed in 6972 ms
+2025-12-26 03:05:45 - Filter 'jwtAuthenticationFilter' configured for use
+2025-12-26 03:05:47 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-26 03:05:47 - HHH000412: Hibernate ORM core version 6.3.1.Final
+2025-12-26 03:05:47 - HHH000026: Second-level cache disabled
+2025-12-26 03:05:48 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-26 03:05:48 - HikariPool-1 - Starting...
+2025-12-26 03:05:48 - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@41424c12
+2025-12-26 03:05:48 - HikariPool-1 - Start completed.
+2025-12-26 03:05:49 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-26 03:05:52 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-26 03:05:53 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-26 03:05:54 - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-26 03:05:57 - 
 
-Using generated security password: 5c83de31-e1b9-450b-8418-f72895ed05a7
+Using generated security password: 393477cf-67b8-4d41-a217-03eaf6d65f20
 
 This generated password is for development use only. Your security configuration must be updated before running your application in production.
 
-2025-12-25 16:35:07 - Patterns [/ws] in 'stompWebSocketHandlerMapping'
-2025-12-25 16:35:07 - 43 mappings in 'requestMappingHandlerMapping'
-2025-12-25 16:35:07 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
-2025-12-25 16:35:07 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5dd7accc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7fcae813, org.springframework.security.web.context.SecurityContextHolderFilter@69e33f9e, org.springframework.security.web.header.HeaderWriterFilter@211881b6, org.springframework.web.filter.CorsFilter@3585a7c3, org.springframework.security.web.authentication.logout.LogoutFilter@2c66311e, com.myemohealth.security.JwtAuthenticationFilter@774c460f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7dfe4f6f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@150cb17e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5cf18e3b, org.springframework.security.web.session.SessionManagementFilter@2d8fe5f7, org.springframework.security.web.access.ExceptionTranslationFilter@127bbdd1, org.springframework.security.web.access.intercept.AuthorizationFilter@7cfbc885]
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - Patterns [/ws] in 'stompWebSocketHandlerMapping'
+2025-12-26 03:05:57 - 43 mappings in 'requestMappingHandlerMapping'
+2025-12-26 03:05:57 - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-12-26 03:05:57 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7c199d91, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6b58364, org.springframework.security.web.context.SecurityContextHolderFilter@5b334b49, org.springframework.security.web.header.HeaderWriterFilter@28eb7d58, org.springframework.web.filter.CorsFilter@7611db5a, org.springframework.security.web.authentication.logout.LogoutFilter@687faa71, com.myemohealth.security.JwtAuthenticationFilter@5c73a0ed, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3322c5a7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6e8d16de, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3d219e92, org.springframework.security.web.session.SessionManagementFilter@2984789a, org.springframework.security.web.access.ExceptionTranslationFilter@7afedb06, org.springframework.security.web.access.intercept.AuthorizationFilter@20ab4fb1]
+2025-12-26 03:05:57 - 
 	c.m.c.AuthController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.ChatController:
-	{[MESSAGE],[/call/ice-candidate]}: handleIceCandidate(Map)
+	{[MESSAGE],[/chat]}: processMessage(ChatMessage)
 	{[MESSAGE],[/call/answer]}: handleCallAnswer(Map)
 	{[MESSAGE],[/call/offer]}: handleCallOffer(Map)
-	{[MESSAGE],[/chat]}: processMessage(ChatMessage)
-2025-12-25 16:35:07 - 
+	{[MESSAGE],[/call/ice-candidate]}: handleIceCandidate(Map)
+2025-12-26 03:05:57 - 
 	c.m.c.DashboardController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.DoctorController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.PatientAnalysisController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.QcmController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.TestController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.UserController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	c.m.c.VoiceController:
 	
-2025-12-25 16:35:07 - 
+2025-12-26 03:05:57 - 
 	o.s.b.a.w.s.e.BasicErrorController:
 	
-2025-12-25 16:35:08 - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
-2025-12-25 16:35:08 - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
-2025-12-25 16:35:08 - LiveReload server is running on port 35729
-2025-12-25 16:35:08 - Tomcat started on port 8082 (http) with context path ''
-2025-12-25 16:35:08 - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
-2025-12-25 16:35:08 - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
-2025-12-25 16:35:08 - Starting...
-2025-12-25 16:35:08 - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5514823c]
-2025-12-25 16:35:08 - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5514823c]
-2025-12-25 16:35:08 - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@5514823c]]
-2025-12-25 16:35:08 - Started.
-2025-12-25 16:35:08 - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-12-25 16:35:08 - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
-2025-12-25 16:35:08 - Started MyEmoHealthApplication in 21.913 seconds (process running for 23.551)
-2025-12-25 16:35:08 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-12-25 16:35:08 - Initializing Servlet 'dispatcherServlet'
-2025-12-25 16:35:08 - Detected StandardServletMultipartResolver
-2025-12-25 16:35:08 - Detected AcceptHeaderLocaleResolver
-2025-12-25 16:35:08 - Detected FixedThemeResolver
-2025-12-25 16:35:08 - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@d279b5e
-2025-12-25 16:35:08 - Detected org.springframework.web.servlet.support.SessionFlashMapManager@c24d227
-2025-12-25 16:35:08 - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
-2025-12-25 16:35:08 - Completed initialization in 5 ms
-2025-12-25 16:35:08 - Securing POST /api/auth/register
-2025-12-25 16:35:08 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:35:08 - Cache miss for REQUEST dispatch to '/api/auth/register' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
-2025-12-25 16:35:08 - Secured POST /api/auth/register
-2025-12-25 16:35:08 - POST "/api/auth/register", parameters={}
-2025-12-25 16:35:08 - Mapped to com.myemohealth.controller.AuthController#register(RegisterRequest)
-2025-12-25 16:35:09 - Read "application/json;charset=UTF-8" to [RegisterRequest(email=doctor1@example.com, password=password, firstName=John, lastName=Doe, role=DOC (truncated)...]
-2025-12-25 16:35:09 - 
+2025-12-26 03:05:58 - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-12-26 03:05:58 - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-12-26 03:05:58 - LiveReload server is running on port 35729
+2025-12-26 03:05:58 - Tomcat started on port 8082 (http) with context path ''
+2025-12-26 03:05:58 - clientOutboundChannel added SubProtocolWebSocketHandler[StompSubProtocolHandler[v10.stomp, v11.stomp, v12.stomp]]
+2025-12-26 03:05:58 - clientInboundChannel added WebSocketAnnotationMethodMessageHandler[prefixes=[/app/]]
+2025-12-26 03:05:58 - Starting...
+2025-12-26 03:05:58 - clientInboundChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2f3e7878]
+2025-12-26 03:05:58 - brokerChannel added SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2f3e7878]
+2025-12-26 03:05:58 - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2f3e7878]]
+2025-12-26 03:05:58 - Started.
+2025-12-26 03:05:58 - clientInboundChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-12-26 03:05:58 - brokerChannel added UserDestinationMessageHandler[DefaultUserDestinationResolver[prefix=/user/]]
+2025-12-26 03:05:58 - Started MyEmoHealthApplication in 22.51 seconds (process running for 24.052)
+2025-12-26 03:06:29 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-26 03:06:29 - Initializing Servlet 'dispatcherServlet'
+2025-12-26 03:06:29 - Detected StandardServletMultipartResolver
+2025-12-26 03:06:29 - Detected AcceptHeaderLocaleResolver
+2025-12-26 03:06:29 - Detected FixedThemeResolver
+2025-12-26 03:06:29 - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@248c6862
+2025-12-26 03:06:29 - Detected org.springframework.web.servlet.support.SessionFlashMapManager@6310c4a5
+2025-12-26 03:06:29 - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-12-26 03:06:29 - Completed initialization in 10 ms
+2025-12-26 03:06:29 - Securing OPTIONS /api/auth/register
+2025-12-26 03:06:29 - Securing POST /api/auth/register
+2025-12-26 03:06:29 - Set SecurityContextHolder to anonymous SecurityContext
+2025-12-26 03:06:29 - Cache miss for REQUEST dispatch to '/api/auth/register' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2025-12-26 03:06:29 - Secured POST /api/auth/register
+2025-12-26 03:06:29 - POST "/api/auth/register", parameters={}
+2025-12-26 03:06:29 - Mapped to com.myemohealth.controller.AuthController#register(RegisterRequest)
+2025-12-26 03:06:29 - Read "application/json;charset=UTF-8" to [RegisterRequest(email=newuser_1766714786343@example.com, password=securePassword123, firstName=New,  (truncated)...]
+2025-12-26 03:06:29 - 
     /* <criteria> */ select
         u1_0.id 
     from
@@ -140,53 +141,58 @@ This generated password is for development use only. Your security configuration
         u1_0.email=? 
     fetch
         first ? rows only
-2025-12-25 16:35:09 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-12-25 16:35:09 - Writing [AuthController.ErrorResponse(error=Email already registered)]
-2025-12-25 16:35:09 - Completed 400 BAD_REQUEST
-2025-12-25 16:35:09 - Securing POST /api/auth/register
-2025-12-25 16:35:09 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:35:09 - Secured POST /api/auth/register
-2025-12-25 16:35:09 - POST "/api/auth/register", parameters={}
-2025-12-25 16:35:09 - Mapped to com.myemohealth.controller.AuthController#register(RegisterRequest)
-2025-12-25 16:35:09 - Read "application/json;charset=UTF-8" to [RegisterRequest(email=patient1@example.com, password=password, firstName=Alice, lastName=Dupont, rol (truncated)...]
-2025-12-25 16:35:09 - 
+2025-12-26 03:06:29 - 
     /* <criteria> */ select
-        u1_0.id 
+        r1_0.id,
+        r1_0.description,
+        r1_0.name 
     from
-        "user" u1_0 
+        role r1_0 
     where
-        u1_0.email=? 
-    fetch
-        first ? rows only
-2025-12-25 16:35:09 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-12-25 16:35:09 - Writing [AuthController.ErrorResponse(error=Email already registered)]
-2025-12-25 16:35:09 - Completed 400 BAD_REQUEST
-2025-12-25 16:35:10 - Securing POST /api/auth/register
-2025-12-25 16:35:10 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:35:10 - Secured POST /api/auth/register
-2025-12-25 16:35:10 - POST "/api/auth/register", parameters={}
-2025-12-25 16:35:10 - Mapped to com.myemohealth.controller.AuthController#register(RegisterRequest)
-2025-12-25 16:35:10 - Read "application/json;charset=UTF-8" to [RegisterRequest(email=e2e_doctor@example.com, password=password123, firstName=E2E, lastName=Tester,  (truncated)...]
-2025-12-25 16:35:10 - 
-    /* <criteria> */ select
-        u1_0.id 
+        r1_0.name=?
+2025-12-26 03:06:30 - 
+    /* insert for
+        com.myemohealth.entity.User */insert 
+    into
+        "user" (created_at, email, email_verified, enabled, first_name, last_login, last_name, password_hash, role_id, updated_at, uuid) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-12-26 03:06:30 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
     from
-        "user" u1_0 
+        patient_profile pp1_0 
     where
-        u1_0.email=? 
-    fetch
-        first ? rows only
-2025-12-25 16:35:10 - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
-2025-12-25 16:35:10 - Writing [AuthController.ErrorResponse(error=Email already registered)]
-2025-12-25 16:35:10 - Completed 400 BAD_REQUEST
-2025-12-25 16:35:42 - Securing OPTIONS /api/auth/login
-2025-12-25 16:35:42 - Securing POST /api/auth/login
-2025-12-25 16:35:42 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:35:42 - Secured POST /api/auth/login
-2025-12-25 16:35:42 - POST "/api/auth/login", parameters={}
-2025-12-25 16:35:42 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
-2025-12-25 16:35:42 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@7e864ead]
-2025-12-25 16:35:42 - 
+        pp1_0.user_id=?
+2025-12-26 03:06:30 - 
+    /* insert for
+        com.myemohealth.entity.PatientProfile */insert 
+    into
+        patient_profile (admission_date, consent_data_sharing, consent_voice_recording, created_at, current_phase, date_naissance, discharge_date, doctor_id, medical_notes, sexe, updated_at, user_id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-12-26 03:06:30 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:30 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFUSUVOVCIsInVzZXJJZCI6MTQsImVtYWlsIjoibm (truncated)...]
+2025-12-26 03:06:30 - Completed 201 CREATED
+2025-12-26 03:06:31 - Securing OPTIONS /api/auth/login
+2025-12-26 03:06:31 - Securing POST /api/auth/login
+2025-12-26 03:06:31 - Authenticated user: newuser_1766714786343@example.com (ID: 14) with role: PATIENT
+2025-12-26 03:06:31 - Secured POST /api/auth/login
+2025-12-26 03:06:31 - POST "/api/auth/login", parameters={}
+2025-12-26 03:06:31 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
+2025-12-26 03:06:31 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@27d5a6b5]
+2025-12-26 03:06:31 - 
     /* SELECT
         u 
     FROM
@@ -219,7 +225,7 @@ This generated password is for development use only. Your security configuration
                 on r1_0.id=u1_0.role_id 
         where
             u1_0.email=?
-2025-12-25 16:35:42 - 
+2025-12-26 03:06:31 - 
     select
         dp1_0.user_id,
         dp1_0.availabilities,
@@ -233,7 +239,7 @@ This generated password is for development use only. Your security configuration
         doctor_profile dp1_0 
     where
         dp1_0.user_id=?
-2025-12-25 16:35:42 - 
+2025-12-26 03:06:31 - 
     select
         pp1_0.user_id,
         pp1_0.admission_date,
@@ -251,7 +257,7 @@ This generated password is for development use only. Your security configuration
         patient_profile pp1_0 
     where
         pp1_0.user_id=?
-2025-12-25 16:35:43 - 
+2025-12-26 03:06:31 - 
     /* update
         for com.myemohealth.entity.User */update "user" 
     set
@@ -266,16 +272,16 @@ This generated password is for development use only. Your security configuration
         updated_at=? 
     where
         id=?
-2025-12-25 16:35:43 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:35:43 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiRE9DVE9SIiwidXNlcklkIjozLCJlbWFpbCI6ImUyZV (truncated)...]
-2025-12-25 16:35:43 - Completed 200 OK
-2025-12-25 16:35:43 - Securing OPTIONS /api/dashboard/stats
-2025-12-25 16:35:43 - Securing GET /api/dashboard/stats
-2025-12-25 16:35:43 - Authenticated user: e2e_doctor@example.com (ID: 3) with role: DOCTOR
-2025-12-25 16:35:43 - Secured GET /api/dashboard/stats
-2025-12-25 16:35:43 - GET "/api/dashboard/stats", parameters={}
-2025-12-25 16:35:43 - Mapped to com.myemohealth.controller.DashboardController#getStats()
-2025-12-25 16:35:43 - 
+2025-12-26 03:06:31 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:31 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFUSUVOVCIsInVzZXJJZCI6MTQsImVtYWlsIjoibm (truncated)...]
+2025-12-26 03:06:31 - Completed 200 OK
+2025-12-26 03:06:32 - Securing OPTIONS /api/dashboard/stats
+2025-12-26 03:06:32 - Securing GET /api/dashboard/stats
+2025-12-26 03:06:32 - Authenticated user: newuser_1766714786343@example.com (ID: 14) with role: PATIENT
+2025-12-26 03:06:32 - Secured GET /api/dashboard/stats
+2025-12-26 03:06:32 - GET "/api/dashboard/stats", parameters={}
+2025-12-26 03:06:32 - Mapped to com.myemohealth.controller.DashboardController#getStats()
+2025-12-26 03:06:32 - 
     /* SELECT
         COUNT(u) 
     FROM
@@ -292,7 +298,7 @@ This generated password is for development use only. Your security configuration
                 on r1_0.id=u1_0.role_id 
         where
             r1_0.name='PATIENT'
-2025-12-25 16:35:43 - 
+2025-12-26 03:06:32 - 
     /* select
         count(*) 
     from
@@ -300,7 +306,7 @@ This generated password is for development use only. Your security configuration
             count(*) 
         from
             test_instance ti1_0
-2025-12-25 16:35:43 - 
+2025-12-26 03:06:32 - 
     /* SELECT
         COUNT(t) 
     FROM
@@ -312,7 +318,7 @@ This generated password is for development use only. Your security configuration
             test_instance ti1_0 
         where
             ti1_0.score>=15
-2025-12-25 16:35:43 - 
+2025-12-26 03:06:32 - 
     /* SELECT
         COUNT(t) 
     FROM
@@ -324,16 +330,735 @@ This generated password is for development use only. Your security configuration
             test_instance ti1_0 
         where
             ti1_0.status='COMPLETED'
-2025-12-25 16:35:43 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:35:43 - Writing [DashboardController.DashboardStats(totalPatients=1, totalTests=0, criticalCases=0, completedTests=0)]
-2025-12-25 16:35:43 - Completed 200 OK
-2025-12-25 16:35:43 - Securing OPTIONS /api/doctors/patients
-2025-12-25 16:35:44 - Securing GET /api/doctors/patients
-2025-12-25 16:35:44 - Authenticated user: e2e_doctor@example.com (ID: 3) with role: DOCTOR
-2025-12-25 16:35:44 - Secured GET /api/doctors/patients
-2025-12-25 16:35:44 - GET "/api/doctors/patients", parameters={}
-2025-12-25 16:35:44 - Mapped to com.myemohealth.controller.DoctorController#getAllPatients()
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:32 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:32 - Writing [DashboardController.DashboardStats(totalPatients=12, totalTests=1, criticalCases=0, completedTests=0 (truncated)...]
+2025-12-26 03:06:32 - Completed 200 OK
+2025-12-26 03:06:39 - Securing OPTIONS /api/auth/login
+2025-12-26 03:06:39 - Securing POST /api/auth/login
+2025-12-26 03:06:39 - Set SecurityContextHolder to anonymous SecurityContext
+2025-12-26 03:06:39 - Secured POST /api/auth/login
+2025-12-26 03:06:39 - POST "/api/auth/login", parameters={}
+2025-12-26 03:06:39 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
+2025-12-26 03:06:39 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@48c369a6]
+2025-12-26 03:06:39 - 
+    /* SELECT
+        u 
+    FROM
+        User u 
+    LEFT JOIN
+        
+    FETCH
+        u.role 
+    WHERE
+        u.email = :email */ select
+            u1_0.id,
+            u1_0.created_at,
+            u1_0.email,
+            u1_0.email_verified,
+            u1_0.enabled,
+            u1_0.first_name,
+            u1_0.last_login,
+            u1_0.last_name,
+            u1_0.password_hash,
+            u1_0.role_id,
+            r1_0.id,
+            r1_0.description,
+            r1_0.name,
+            u1_0.updated_at,
+            u1_0.uuid 
+        from
+            "user" u1_0 
+        left join
+            role r1_0 
+                on r1_0.id=u1_0.role_id 
+        where
+            u1_0.email=?
+2025-12-26 03:06:39 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:39 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:39 - 
+    /* update
+        for com.myemohealth.entity.User */update "user" 
+    set
+        email=?,
+        email_verified=?,
+        enabled=?,
+        first_name=?,
+        last_login=?,
+        last_name=?,
+        password_hash=?,
+        role_id=?,
+        updated_at=? 
+    where
+        id=?
+2025-12-26 03:06:39 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:39 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFUSUVOVCIsInVzZXJJZCI6NiwiZW1haWwiOiJuZX (truncated)...]
+2025-12-26 03:06:39 - Completed 200 OK
+2025-12-26 03:06:39 - Securing OPTIONS /api/dashboard/stats
+2025-12-26 03:06:39 - Securing GET /api/dashboard/stats
+2025-12-26 03:06:39 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:39 - Secured GET /api/dashboard/stats
+2025-12-26 03:06:39 - GET "/api/dashboard/stats", parameters={}
+2025-12-26 03:06:39 - Mapped to com.myemohealth.controller.DashboardController#getStats()
+2025-12-26 03:06:39 - 
+    /* SELECT
+        COUNT(u) 
+    FROM
+        User u 
+    JOIN
+        u.role r 
+    WHERE
+        r.name = 'PATIENT' */ select
+            count(u1_0.id) 
+        from
+            "user" u1_0 
+        join
+            role r1_0 
+                on r1_0.id=u1_0.role_id 
+        where
+            r1_0.name='PATIENT'
+2025-12-26 03:06:39 - 
+    /* select
+        count(*) 
+    from
+        TestInstance x */ select
+            count(*) 
+        from
+            test_instance ti1_0
+2025-12-26 03:06:39 - 
+    /* SELECT
+        COUNT(t) 
+    FROM
+        TestInstance t 
+    WHERE
+        t.score >= 15 */ select
+            count(ti1_0.id) 
+        from
+            test_instance ti1_0 
+        where
+            ti1_0.score>=15
+2025-12-26 03:06:39 - 
+    /* SELECT
+        COUNT(t) 
+    FROM
+        TestInstance t 
+    WHERE
+        t.status = 'COMPLETED' */ select
+            count(ti1_0.id) 
+        from
+            test_instance ti1_0 
+        where
+            ti1_0.status='COMPLETED'
+2025-12-26 03:06:39 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:39 - Writing [DashboardController.DashboardStats(totalPatients=12, totalTests=1, criticalCases=0, completedTests=0 (truncated)...]
+2025-12-26 03:06:39 - Completed 200 OK
+2025-12-26 03:06:41 - Securing OPTIONS /api/qcms
+2025-12-26 03:06:41 - Securing GET /api/qcms
+2025-12-26 03:06:41 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:41 - Secured GET /api/qcms
+2025-12-26 03:06:41 - GET "/api/qcms", parameters={}
+2025-12-26 03:06:41 - Mapped to com.myemohealth.controller.QcmController#getAllTemplates()
+2025-12-26 03:06:41 - 
+    /* SELECT
+        q 
+    FROM
+        QcmTemplate q 
+    LEFT JOIN
+        
+    FETCH
+        q.creator */ select
+            qt1_0.id,
+            qt1_0.category,
+            qt1_0.created_at,
+            qt1_0.creator_id,
+            c1_0.id,
+            c1_0.created_at,
+            c1_0.email,
+            c1_0.email_verified,
+            c1_0.enabled,
+            c1_0.first_name,
+            c1_0.last_login,
+            c1_0.last_name,
+            c1_0.password_hash,
+            c1_0.role_id,
+            c1_0.updated_at,
+            c1_0.uuid,
+            qt1_0.description,
+            qt1_0.difficulty_level,
+            qt1_0.estimated_duration_minutes,
+            qt1_0.is_active,
+            qt1_0.title,
+            qt1_0.updated_at,
+            qt1_0.uuid,
+            qt1_0.version 
+        from
+            qcm_template qt1_0 
+        left join
+            "user" c1_0 
+                on c1_0.id=qt1_0.creator_id
+2025-12-26 03:06:41 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:41 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:41 - 
+    select
+        r1_0.id,
+        r1_0.description,
+        r1_0.name 
+    from
+        role r1_0 
+    where
+        r1_0.id=?
+2025-12-26 03:06:41 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:41 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:41 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:41 - Writing [[com.myemohealth.entity.QcmTemplate@1bf16a64, com.myemohealth.entity.QcmTemplate@e10cb83, com.myemoh (truncated)...]
+2025-12-26 03:06:41 - Completed 200 OK
+2025-12-26 03:06:46 - Securing OPTIONS /api/qcms
+2025-12-26 03:06:46 - Securing POST /api/qcms
+2025-12-26 03:06:46 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:46 - Secured POST /api/qcms
+2025-12-26 03:06:46 - POST "/api/qcms", parameters={}
+2025-12-26 03:06:46 - Mapped to com.myemohealth.controller.QcmController#createTemplate(QcmTemplate)
+2025-12-26 03:06:47 - Read "application/json;charset=UTF-8" to [com.myemohealth.entity.QcmTemplate@39d723a5]
+2025-12-26 03:06:47 - 
+    /* SELECT
+        u 
+    FROM
+        User u 
+    LEFT JOIN
+        
+    FETCH
+        u.role 
+    WHERE
+        u.email = :email */ select
+            u1_0.id,
+            u1_0.created_at,
+            u1_0.email,
+            u1_0.email_verified,
+            u1_0.enabled,
+            u1_0.first_name,
+            u1_0.last_login,
+            u1_0.last_name,
+            u1_0.password_hash,
+            u1_0.role_id,
+            r1_0.id,
+            r1_0.description,
+            r1_0.name,
+            u1_0.updated_at,
+            u1_0.uuid 
+        from
+            "user" u1_0 
+        left join
+            role r1_0 
+                on r1_0.id=u1_0.role_id 
+        where
+            u1_0.email=?
+2025-12-26 03:06:47 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:47 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:47 - 
+    /* insert for
+        com.myemohealth.entity.QcmTemplate */insert 
+    into
+        qcm_template (category, created_at, creator_id, description, difficulty_level, estimated_duration_minutes, is_active, title, updated_at, uuid, version) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-12-26 03:06:47 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:47 - Writing [com.myemohealth.entity.QcmTemplate@39d723a5]
+2025-12-26 03:06:47 - Completed 200 OK
+2025-12-26 03:06:47 - Securing GET /api/qcms
+2025-12-26 03:06:47 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:47 - Securing OPTIONS /api/qcms/12/questions
+2025-12-26 03:06:47 - Secured GET /api/qcms
+2025-12-26 03:06:47 - GET "/api/qcms", parameters={}
+2025-12-26 03:06:47 - Mapped to com.myemohealth.controller.QcmController#getAllTemplates()
+2025-12-26 03:06:47 - Securing GET /api/qcms/12/questions
+2025-12-26 03:06:47 - 
+    /* SELECT
+        q 
+    FROM
+        QcmTemplate q 
+    LEFT JOIN
+        
+    FETCH
+        q.creator */ select
+            qt1_0.id,
+            qt1_0.category,
+            qt1_0.created_at,
+            qt1_0.creator_id,
+            c1_0.id,
+            c1_0.created_at,
+            c1_0.email,
+            c1_0.email_verified,
+            c1_0.enabled,
+            c1_0.first_name,
+            c1_0.last_login,
+            c1_0.last_name,
+            c1_0.password_hash,
+            c1_0.role_id,
+            c1_0.updated_at,
+            c1_0.uuid,
+            qt1_0.description,
+            qt1_0.difficulty_level,
+            qt1_0.estimated_duration_minutes,
+            qt1_0.is_active,
+            qt1_0.title,
+            qt1_0.updated_at,
+            qt1_0.uuid,
+            qt1_0.version 
+        from
+            qcm_template qt1_0 
+        left join
+            "user" c1_0 
+                on c1_0.id=qt1_0.creator_id
+2025-12-26 03:06:47 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:47 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:47 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:47 - 
+    select
+        r1_0.id,
+        r1_0.description,
+        r1_0.name 
+    from
+        role r1_0 
+    where
+        r1_0.id=?
+2025-12-26 03:06:47 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:47 - Secured GET /api/qcms/12/questions
+2025-12-26 03:06:47 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:47 - GET "/api/qcms/12/questions", parameters={}
+2025-12-26 03:06:47 - Mapped to com.myemohealth.controller.QcmController#getQuestions(Long)
+2025-12-26 03:06:47 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:47 - Writing [[com.myemohealth.entity.QcmTemplate@7963beac, com.myemohealth.entity.QcmTemplate@24ce6b88, com.myemo (truncated)...]
+2025-12-26 03:06:47 - Completed 200 OK
+2025-12-26 03:06:47 - 
+    /* SELECT
+        q 
+    FROM
+        QcmQuestion q 
+    WHERE
+        q.qcmTemplate.id = :qcmId 
+    ORDER BY
+        q.position */ select
+            qq1_0.id,
+            qq1_0.correct_answer,
+            qq1_0.created_at,
+            qq1_0.explanation,
+            qq1_0.options,
+            qq1_0.position,
+            qq1_0.qcm_id,
+            qq1_0.question_text,
+            qq1_0.question_type,
+            qq1_0.weight 
+        from
+            qcm_question qq1_0 
+        where
+            qq1_0.qcm_id=? 
+        order by
+            qq1_0.position
+2025-12-26 03:06:47 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:47 - Writing [[]]
+2025-12-26 03:06:47 - Completed 200 OK
+2025-12-26 03:06:48 - Securing OPTIONS /api/qcms/12/questions
+2025-12-26 03:06:48 - Securing POST /api/qcms/12/questions
+2025-12-26 03:06:48 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:48 - Secured POST /api/qcms/12/questions
+2025-12-26 03:06:48 - POST "/api/qcms/12/questions", parameters={}
+2025-12-26 03:06:48 - Mapped to com.myemohealth.controller.QcmController#createQuestion(Long, QcmQuestion)
+2025-12-26 03:06:48 - Read "application/json;charset=UTF-8" to [com.myemohealth.entity.QcmQuestion@7deec64e]
+2025-12-26 03:06:48 - 
+    select
+        qt1_0.id,
+        qt1_0.category,
+        qt1_0.created_at,
+        qt1_0.creator_id,
+        qt1_0.description,
+        qt1_0.difficulty_level,
+        qt1_0.estimated_duration_minutes,
+        qt1_0.is_active,
+        qt1_0.title,
+        qt1_0.updated_at,
+        qt1_0.uuid,
+        qt1_0.version 
+    from
+        qcm_template qt1_0 
+    where
+        qt1_0.id=?
+2025-12-26 03:06:48 - 
+    /* insert for
+        com.myemohealth.entity.QcmQuestion */insert 
+    into
+        qcm_question (correct_answer, created_at, explanation, options, position, qcm_id, question_text, question_type, weight) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?)
+2025-12-26 03:06:48 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:48 - Writing [com.myemohealth.entity.QcmQuestion@7deec64e]
+2025-12-26 03:06:48 - Completed 200 OK
+2025-12-26 03:06:48 - Securing GET /api/qcms/12/questions
+2025-12-26 03:06:48 - Authenticated user: newuser_1766693388790@example.com (ID: 6) with role: PATIENT
+2025-12-26 03:06:48 - Secured GET /api/qcms/12/questions
+2025-12-26 03:06:48 - GET "/api/qcms/12/questions", parameters={}
+2025-12-26 03:06:48 - Mapped to com.myemohealth.controller.QcmController#getQuestions(Long)
+2025-12-26 03:06:48 - 
+    /* SELECT
+        q 
+    FROM
+        QcmQuestion q 
+    WHERE
+        q.qcmTemplate.id = :qcmId 
+    ORDER BY
+        q.position */ select
+            qq1_0.id,
+            qq1_0.correct_answer,
+            qq1_0.created_at,
+            qq1_0.explanation,
+            qq1_0.options,
+            qq1_0.position,
+            qq1_0.qcm_id,
+            qq1_0.question_text,
+            qq1_0.question_type,
+            qq1_0.weight 
+        from
+            qcm_question qq1_0 
+        where
+            qq1_0.qcm_id=? 
+        order by
+            qq1_0.position
+2025-12-26 03:06:48 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:48 - Writing [[com.myemohealth.entity.QcmQuestion@499457f]]
+2025-12-26 03:06:48 - Completed 200 OK
+2025-12-26 03:06:55 - Securing OPTIONS /api/auth/login
+2025-12-26 03:06:55 - Securing POST /api/auth/login
+2025-12-26 03:06:55 - Set SecurityContextHolder to anonymous SecurityContext
+2025-12-26 03:06:55 - Secured POST /api/auth/login
+2025-12-26 03:06:55 - POST "/api/auth/login", parameters={}
+2025-12-26 03:06:55 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
+2025-12-26 03:06:55 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@6bf0be33]
+2025-12-26 03:06:55 - 
+    /* SELECT
+        u 
+    FROM
+        User u 
+    LEFT JOIN
+        
+    FETCH
+        u.role 
+    WHERE
+        u.email = :email */ select
+            u1_0.id,
+            u1_0.created_at,
+            u1_0.email,
+            u1_0.email_verified,
+            u1_0.enabled,
+            u1_0.first_name,
+            u1_0.last_login,
+            u1_0.last_name,
+            u1_0.password_hash,
+            u1_0.role_id,
+            r1_0.id,
+            r1_0.description,
+            r1_0.name,
+            u1_0.updated_at,
+            u1_0.uuid 
+        from
+            "user" u1_0 
+        left join
+            role r1_0 
+                on r1_0.id=u1_0.role_id 
+        where
+            u1_0.email=?
+2025-12-26 03:06:55 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:55 - 
+    select
+        pp1_0.user_id,
+        pp1_0.admission_date,
+        pp1_0.consent_data_sharing,
+        pp1_0.consent_voice_recording,
+        pp1_0.created_at,
+        pp1_0.current_phase,
+        pp1_0.date_naissance,
+        pp1_0.discharge_date,
+        pp1_0.doctor_id,
+        pp1_0.medical_notes,
+        pp1_0.sexe,
+        pp1_0.updated_at 
+    from
+        patient_profile pp1_0 
+    where
+        pp1_0.user_id=?
+2025-12-26 03:06:55 - 
+    /* update
+        for com.myemohealth.entity.User */update "user" 
+    set
+        email=?,
+        email_verified=?,
+        enabled=?,
+        first_name=?,
+        last_login=?,
+        last_name=?,
+        password_hash=?,
+        role_id=?,
+        updated_at=? 
+    where
+        id=?
+2025-12-26 03:06:55 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:55 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFUSUVOVCIsInVzZXJJZCI6NSwiZW1haWwiOiJ0ZX (truncated)...]
+2025-12-26 03:06:55 - Completed 200 OK
+2025-12-26 03:06:56 - Securing OPTIONS /api/dashboard/stats
+2025-12-26 03:06:56 - Securing GET /api/dashboard/stats
+2025-12-26 03:06:56 - Authenticated user: testpatient@test.com (ID: 5) with role: PATIENT
+2025-12-26 03:06:56 - Secured GET /api/dashboard/stats
+2025-12-26 03:06:56 - GET "/api/dashboard/stats", parameters={}
+2025-12-26 03:06:56 - Mapped to com.myemohealth.controller.DashboardController#getStats()
+2025-12-26 03:06:56 - 
+    /* SELECT
+        COUNT(u) 
+    FROM
+        User u 
+    JOIN
+        u.role r 
+    WHERE
+        r.name = 'PATIENT' */ select
+            count(u1_0.id) 
+        from
+            "user" u1_0 
+        join
+            role r1_0 
+                on r1_0.id=u1_0.role_id 
+        where
+            r1_0.name='PATIENT'
+2025-12-26 03:06:56 - 
+    /* select
+        count(*) 
+    from
+        TestInstance x */ select
+            count(*) 
+        from
+            test_instance ti1_0
+2025-12-26 03:06:56 - 
+    /* SELECT
+        COUNT(t) 
+    FROM
+        TestInstance t 
+    WHERE
+        t.score >= 15 */ select
+            count(ti1_0.id) 
+        from
+            test_instance ti1_0 
+        where
+            ti1_0.score>=15
+2025-12-26 03:06:56 - 
+    /* SELECT
+        COUNT(t) 
+    FROM
+        TestInstance t 
+    WHERE
+        t.status = 'COMPLETED' */ select
+            count(ti1_0.id) 
+        from
+            test_instance ti1_0 
+        where
+            ti1_0.status='COMPLETED'
+2025-12-26 03:06:56 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:56 - Writing [DashboardController.DashboardStats(totalPatients=12, totalTests=1, criticalCases=0, completedTests=0 (truncated)...]
+2025-12-26 03:06:56 - Completed 200 OK
+2025-12-26 03:06:56 - Securing OPTIONS /api/doctors/patients
+2025-12-26 03:06:56 - Securing GET /api/doctors/patients
+2025-12-26 03:06:56 - Authenticated user: testpatient@test.com (ID: 5) with role: PATIENT
+2025-12-26 03:06:56 - Secured GET /api/doctors/patients
+2025-12-26 03:06:56 - GET "/api/doctors/patients", parameters={}
+2025-12-26 03:06:56 - Mapped to com.myemohealth.controller.DoctorController#getAllPatients()
+2025-12-26 03:06:56 - 
     /* SELECT
         p 
     FROM
@@ -389,7 +1114,7 @@ This generated password is for development use only. Your security configuration
         left join
             "user" d1_0 
                 on d1_0.id=pp1_0.doctor_id
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:56 - 
     select
         dp1_0.user_id,
         dp1_0.availabilities,
@@ -403,7 +1128,7 @@ This generated password is for development use only. Your security configuration
         doctor_profile dp1_0 
     where
         dp1_0.user_id=?
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:56 - 
     select
         pp1_0.user_id,
         pp1_0.admission_date,
@@ -421,7 +1146,7 @@ This generated password is for development use only. Your security configuration
         patient_profile pp1_0 
     where
         pp1_0.user_id=?
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:56 - 
     select
         r1_0.id,
         r1_0.description,
@@ -430,7 +1155,7 @@ This generated password is for development use only. Your security configuration
         role r1_0 
     where
         r1_0.id=?
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:56 - 
     select
         dp1_0.user_id,
         dp1_0.availabilities,
@@ -444,7 +1169,7 @@ This generated password is for development use only. Your security configuration
         doctor_profile dp1_0 
     where
         dp1_0.user_id=?
-2025-12-25 16:35:44 - 
+2025-12-26 03:06:56 - 
     select
         r1_0.id,
         r1_0.description,
@@ -453,17 +1178,172 @@ This generated password is for development use only. Your security configuration
         role r1_0 
     where
         r1_0.id=?
-2025-12-25 16:35:44 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:35:44 - Writing [[com.myemohealth.entity.PatientProfile@20ba6e1]]
-2025-12-25 16:35:44 - Completed 200 OK
-2025-12-25 16:35:50 - Securing OPTIONS /api/auth/login
-2025-12-25 16:35:50 - Securing POST /api/auth/login
-2025-12-25 16:35:50 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:35:50 - Secured POST /api/auth/login
-2025-12-25 16:35:50 - POST "/api/auth/login", parameters={}
-2025-12-25 16:35:50 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
-2025-12-25 16:35:50 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@7c35d4c8]
-2025-12-25 16:35:50 - 
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - 
+    select
+        dp1_0.user_id,
+        dp1_0.availabilities,
+        dp1_0.created_at,
+        dp1_0.license_number,
+        dp1_0.max_patients,
+        dp1_0.phone,
+        dp1_0.specialty,
+        dp1_0.updated_at 
+    from
+        doctor_profile dp1_0 
+    where
+        dp1_0.user_id=?
+2025-12-26 03:06:56 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:06:56 - Writing [[com.myemohealth.entity.PatientProfile@170b3284, com.myemohealth.entity.PatientProfile@6aca3c63, com (truncated)...]
+2025-12-26 03:06:56 - Completed 200 OK
+2025-12-26 03:06:58 - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2025-12-26 03:07:08 - Securing OPTIONS /api/auth/login
+2025-12-26 03:07:08 - Securing POST /api/auth/login
+2025-12-26 03:07:08 - Set SecurityContextHolder to anonymous SecurityContext
+2025-12-26 03:07:08 - Secured POST /api/auth/login
+2025-12-26 03:07:08 - POST "/api/auth/login", parameters={}
+2025-12-26 03:07:08 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
+2025-12-26 03:07:08 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@4545c089]
+2025-12-26 03:07:08 - 
     /* SELECT
         u 
     FROM
@@ -496,7 +1376,7 @@ This generated password is for development use only. Your security configuration
                 on r1_0.id=u1_0.role_id 
         where
             u1_0.email=?
-2025-12-25 16:35:50 - 
+2025-12-26 03:07:08 - 
     select
         dp1_0.user_id,
         dp1_0.availabilities,
@@ -510,7 +1390,7 @@ This generated password is for development use only. Your security configuration
         doctor_profile dp1_0 
     where
         dp1_0.user_id=?
-2025-12-25 16:35:50 - 
+2025-12-26 03:07:08 - 
     select
         pp1_0.user_id,
         pp1_0.admission_date,
@@ -528,7 +1408,7 @@ This generated password is for development use only. Your security configuration
         patient_profile pp1_0 
     where
         pp1_0.user_id=?
-2025-12-25 16:35:50 - 
+2025-12-26 03:07:08 - 
     /* update
         for com.myemohealth.entity.User */update "user" 
     set
@@ -543,16 +1423,16 @@ This generated password is for development use only. Your security configuration
         updated_at=? 
     where
         id=?
-2025-12-25 16:35:50 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:35:50 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiRE9DVE9SIiwidXNlcklkIjozLCJlbWFpbCI6ImUyZV (truncated)...]
-2025-12-25 16:35:50 - Completed 200 OK
-2025-12-25 16:35:51 - Securing OPTIONS /api/dashboard/stats
-2025-12-25 16:35:51 - Securing GET /api/dashboard/stats
-2025-12-25 16:35:51 - Authenticated user: e2e_doctor@example.com (ID: 3) with role: DOCTOR
-2025-12-25 16:35:51 - Secured GET /api/dashboard/stats
-2025-12-25 16:35:51 - GET "/api/dashboard/stats", parameters={}
-2025-12-25 16:35:51 - Mapped to com.myemohealth.controller.DashboardController#getStats()
-2025-12-25 16:35:51 - 
+2025-12-26 03:07:08 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:07:08 - Writing [AuthResponse(accessToken=eyJhbGciOiJIUzM4NCJ9.eyJyb2xlIjoiUEFUSUVOVCIsInVzZXJJZCI6NSwiZW1haWwiOiJ0ZX (truncated)...]
+2025-12-26 03:07:08 - Completed 200 OK
+2025-12-26 03:07:08 - Securing OPTIONS /api/dashboard/stats
+2025-12-26 03:07:08 - Securing GET /api/dashboard/stats
+2025-12-26 03:07:08 - Authenticated user: testpatient@test.com (ID: 5) with role: PATIENT
+2025-12-26 03:07:08 - Secured GET /api/dashboard/stats
+2025-12-26 03:07:08 - GET "/api/dashboard/stats", parameters={}
+2025-12-26 03:07:08 - Mapped to com.myemohealth.controller.DashboardController#getStats()
+2025-12-26 03:07:08 - 
     /* SELECT
         COUNT(u) 
     FROM
@@ -569,7 +1449,7 @@ This generated password is for development use only. Your security configuration
                 on r1_0.id=u1_0.role_id 
         where
             r1_0.name='PATIENT'
-2025-12-25 16:35:51 - 
+2025-12-26 03:07:08 - 
     /* select
         count(*) 
     from
@@ -577,7 +1457,7 @@ This generated password is for development use only. Your security configuration
             count(*) 
         from
             test_instance ti1_0
-2025-12-25 16:35:51 - 
+2025-12-26 03:07:08 - 
     /* SELECT
         COUNT(t) 
     FROM
@@ -589,7 +1469,7 @@ This generated password is for development use only. Your security configuration
             test_instance ti1_0 
         where
             ti1_0.score>=15
-2025-12-25 16:35:51 - 
+2025-12-26 03:07:08 - 
     /* SELECT
         COUNT(t) 
     FROM
@@ -601,17 +1481,17 @@ This generated password is for development use only. Your security configuration
             test_instance ti1_0 
         where
             ti1_0.status='COMPLETED'
-2025-12-25 16:35:51 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:35:51 - Writing [DashboardController.DashboardStats(totalPatients=1, totalTests=0, criticalCases=0, completedTests=0)]
-2025-12-25 16:35:51 - Completed 200 OK
-2025-12-25 16:36:06 - Securing OPTIONS /api/auth/login
-2025-12-25 16:36:06 - Securing POST /api/auth/login
-2025-12-25 16:36:06 - Set SecurityContextHolder to anonymous SecurityContext
-2025-12-25 16:36:06 - Secured POST /api/auth/login
-2025-12-25 16:36:06 - POST "/api/auth/login", parameters={}
-2025-12-25 16:36:06 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
-2025-12-25 16:36:06 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@48ed8ace]
-2025-12-25 16:36:06 - 
+2025-12-26 03:07:08 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:07:08 - Writing [DashboardController.DashboardStats(totalPatients=12, totalTests=1, criticalCases=0, completedTests=0 (truncated)...]
+2025-12-26 03:07:08 - Completed 200 OK
+2025-12-26 03:07:19 - Securing OPTIONS /api/auth/login
+2025-12-26 03:07:19 - Securing POST /api/auth/login
+2025-12-26 03:07:19 - Set SecurityContextHolder to anonymous SecurityContext
+2025-12-26 03:07:19 - Secured POST /api/auth/login
+2025-12-26 03:07:19 - POST "/api/auth/login", parameters={}
+2025-12-26 03:07:19 - Mapped to com.myemohealth.controller.AuthController#login(LoginRequest)
+2025-12-26 03:07:19 - Read "application/json;charset=UTF-8" to [com.myemohealth.dto.auth.LoginRequest@79eb5b51]
+2025-12-26 03:07:19 - 
     /* SELECT
         u 
     FROM
@@ -644,14 +1524,14 @@ This generated password is for development use only. Your security configuration
                 on r1_0.id=u1_0.role_id 
         where
             u1_0.email=?
-2025-12-25 16:36:06 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
-2025-12-25 16:36:06 - Writing [AuthController.ErrorResponse(error=Invalid email or password)]
-2025-12-25 16:36:06 - Completed 401 UNAUTHORIZED
+2025-12-26 03:07:19 - Using 'application/json', given [application/json, text/plain, */*] and supported [application/json, application/*+json]
+2025-12-26 03:07:19 - Writing [AuthController.ErrorResponse(error=Invalid email or password)]
+2025-12-26 03:07:19 - Completed 401 UNAUTHORIZED
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  01:29 min
-[INFO] Finished at: 2025-12-25T16:36:07+01:00
+[INFO] Total time:  02:00 min
+[INFO] Finished at: 2025-12-26T03:07:22+01:00
 [INFO] ------------------------------------------------------------------------
 [ERROR] Failed to execute goal org.springframework.boot:spring-boot-maven-plugin:3.2.0:run (default-cli) on project myemohealth-backend: Process terminated with exit code: -1 -> [Help 1]
 [ERROR] 

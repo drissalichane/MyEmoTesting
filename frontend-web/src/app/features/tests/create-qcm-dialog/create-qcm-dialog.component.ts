@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core'; // Add ViewChild
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms'; // Add NgForm
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -8,18 +8,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 
 @Component({
-    selector: 'app-create-qcm-dialog',
-    standalone: true,
-    imports: [
-        CommonModule,
-        FormsModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule
-    ],
-    template: `
+  selector: 'app-create-qcm-dialog',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule
+  ],
+  template: `
     <h2 mat-dialog-title>Create New QCM Template</h2>
     <mat-dialog-content>
       <form #qcmForm="ngForm">
@@ -48,12 +48,12 @@ import { MatSelectModule } from '@angular/material/select';
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button (click)="onCancel()">Cancel</button>
-      <button mat-flat-button color="primary" (click)="onCreate()" [disabled]="!qcmForm.valid">
+      <button mat-flat-button color="primary" (click)="onCreate()">
         Create
       </button>
     </mat-dialog-actions>
   `,
-    styles: [`
+  styles: [`
     .full-width {
       width: 100%;
       margin-bottom: 1rem;
@@ -66,21 +66,27 @@ import { MatSelectModule } from '@angular/material/select';
   `]
 })
 export class CreateQcmDialogComponent {
-    qcm = {
-        title: '',
-        description: '',
-        category: 'MOOD'
-    };
+  @ViewChild('qcmForm') qcmForm!: NgForm;
 
-    constructor(
-        private dialogRef: MatDialogRef<CreateQcmDialogComponent>
-    ) { }
+  qcm = {
+    title: '',
+    description: '',
+    category: 'MOOD'
+  };
 
-    onCreate() {
-        this.dialogRef.close(this.qcm);
+  constructor(
+    private dialogRef: MatDialogRef<CreateQcmDialogComponent>
+  ) { }
+
+  onCreate() {
+    if (this.qcmForm && this.qcmForm.valid) {
+      this.dialogRef.close(this.qcm);
+    } else {
+      this.qcmForm.form.markAllAsTouched();
     }
+  }
 
-    onCancel() {
-        this.dialogRef.close();
-    }
+  onCancel() {
+    this.dialogRef.close();
+  }
 }

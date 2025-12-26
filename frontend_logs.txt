@@ -6,25 +6,26 @@
 [32m✔[39m Building...
 [1mInitial chunk files[22m[2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
 [32mpolyfills.js[39m       [2m | [22m[2mpolyfills[22m               [2m | [22m [36m89.77 kB[39m[2m | [22m
-[32mmain.js[39m            [2m | [22m[2mmain[22m                    [2m | [22m [36m43.39 kB[39m[2m | [22m
+[32mmain.js[39m            [2m | [22m[2mmain[22m                    [2m | [22m [36m45.33 kB[39m[2m | [22m
 [32mchunk-GUOAGOCJ.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m3.22 kB[39m[2m | [22m
 [32mstyles.css[39m         [2m | [22m[2mstyles[22m                  [2m | [22m  [36m2.36 kB[39m[2m | [22m
 [32mchunk-CZJLB7T5.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m1.08 kB[39m[2m | [22m
 
-[1m [22m                  [2m | [22m[1mInitial total[22m           [2m | [22m[1m139.81 kB[22m
+[1m [22m                  [2m | [22m[1mInitial total[22m           [2m | [22m[1m141.75 kB[22m
 
 [1mLazy chunk files[22m   [2m | [22m[1mNames[22m                   [2m | [22m [1mRaw size[22m
-[32mchunk-J5XB5RIT.js[39m  [2m | [22m[2mqcm-list-component[22m      [2m | [22m [36m66.14 kB[39m[2m | [22m
+[32mchunk-YNKBEOJP.js[39m  [2m | [22m[2mqcm-list-component[22m      [2m | [22m [36m66.44 kB[39m[2m | [22m
 [32mchunk-RSW5F5V4.js[39m  [2m | [22m[2mpatient-list-component[22m  [2m | [22m [36m45.76 kB[39m[2m | [22m
 [32mchunk-RUAHNWTD.js[39m  [2m | [22m[2mtest-list-component[22m     [2m | [22m [36m35.69 kB[39m[2m | [22m
 [32mchunk-6HC7HQ65.js[39m  [2m | [22m[2mchat-component[22m          [2m | [22m [36m31.52 kB[39m[2m | [22m
 [32mchunk-HAE27ZOW.js[39m  [2m | [22m[2mpatient-detail-component[22m[2m | [22m [36m28.76 kB[39m[2m | [22m
+[32mchunk-DALGHQUF.js[39m  [2m | [22m[2mregister-component[22m      [2m | [22m [36m25.67 kB[39m[2m | [22m
 [32mchunk-JGCVU5ZP.js[39m  [2m | [22m[2mdashboard-component[22m     [2m | [22m [36m22.09 kB[39m[2m | [22m
 [32mchunk-Z23WWF7W.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m3.01 kB[39m[2m | [22m
 [32mchunk-AAHIARRT.js[39m  [2m | [22m[2m-[22m                       [2m | [22m  [36m2.27 kB[39m[2m | [22m
 [32mchunk-WK3MEOOO.js[39m  [2m | [22m[2m-[22m                       [2m | [22m[36m187 bytes[39m[2m | [22m
 
-Application bundle generation complete. [19.297 seconds]
+Application bundle generation complete. [18.688 seconds]
 
 Watch mode enabled. Watching for file changes...
 NOTE: Raw file sizes do not reflect development server per-request transformations.
@@ -33,5 +34,5 @@ NOTE: Raw file sizes do not reflect development server per-request transformatio
   [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.56.1:[1m4200[22m/[39m
   [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.17.1:[1m4200[22m/[39m
   [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.88.1:[1m4200[22m/[39m
-  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.3.102:[1m4200[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.1.2:[1m4200[22m/[39m
 [2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m

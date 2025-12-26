@@ -1,1 +1,87 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="register-card glass-panel">
+        <div class="logo-header">
+            <div class="logo-icon">
+                <mat-icon>psychology</mat-icon>
+            </div>
+            <h2>Create Account</h2>
+            <p class="subtitle">Join MyEmoHealth today</p>
+        </div>
+
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Name Row -->
+            <div class="row">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <mat-icon matPrefix>person</mat-icon>
+                    <input matInput formControlName="firstName" placeholder="John">
+                    <mat-error *ngIf="registerForm.get('firstName')?.hasError('required')">
+                        First name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    <input matInput formControlName="lastName" placeholder="Doe">
+                    <mat-error *ngIf="registerForm.get('lastName')?.hasError('required')">
+                        Last name is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email Address</mat-label>
+                <mat-icon matPrefix>email</mat-icon>
+                <input matInput formControlName="email" type="email" placeholder="john.doe@example.com">
+                <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+                    Email is required
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
+                    Please enter a valid email address
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Password</mat-label>
+                <mat-icon matPrefix>lock</mat-icon>
+                <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+                    Password is required
+                </mat-error>
+                <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
+                    Password must be at least 8 characters
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+                <mat-label>I am a...</mat-label>
+                <mat-icon matPrefix>badge</mat-icon>
+                <mat-select formControlName="role">
+                    <mat-option value="PATIENT">Patient (Seeking Care)</mat-option>
+                    <mat-option value="DOCTOR">Doctor (Healthcare Provider)</mat-option>
+                </mat-select>
+                <mat-error *ngIf="registerForm.get('role')?.hasError('required')">
+                    Please select a role
+                </mat-error>
+            </mat-form-field>
+
+            <div class="error-message" *ngIf="errorMessage">
+                <mat-icon>error_outline</mat-icon>
+                <span>{{ errorMessage }}</span>
+            </div>
+
+            <button mat-flat-button color="primary" class="submit-btn" type="submit" [disabled]="isLoading">
+                <mat-spinner diameter="20" *ngIf="isLoading"></mat-spinner>
+                <span *ngIf="!isLoading">Create Account</span>
+            </button>
+
+            <div class="login-link">
+                Already have an account? <a routerLink="/auth/login">Sign in</a>
+            </div>
+        </form>
+    </div>
+</div>

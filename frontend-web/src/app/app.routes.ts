@@ -8,6 +8,10 @@ export const routes: Routes = [
         path: 'auth',
         children: [
             { path: 'login', component: LoginComponent },
+            {
+                path: 'register',
+                loadComponent: () => import('./features/auth/register/register.component').then(m => m.RegisterComponent)
+            },
             { path: '', redirectTo: 'login', pathMatch: 'full' }
         ]
     },
